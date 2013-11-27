@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+
+
+	<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.min.css">
+
+	
+	<script src="{{MEDIA_URL}}js/jquery.js"></script>
+<script src="{{MEDIA_URL}}js/script.js"></script>
+<script src="{{MEDIA_URL}}js/bootstrap.js"></script>
+<script src="{{MEDIA_URL}}js/bootstrap-dropdown.js"></script>
+
+<script src="{{MEDIA_URL}}js/bootbox.min.js"></script>
+<script src="{{MEDIA_URL}}js/horario.js"></script>
+<script src="{{MEDIA_URL}}js/formularios.js"></script>
+
+<link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.css">
+<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+<link rel="stylesheet" href="{{STATIC_URL}}css/inc.css">
+
+	<title>SAESCOM</title>
+</head>
+<body>
+	
+	<div id="header">
+		<img src="{{MEDIA_URL}}img/banner.png">
+	</div>
+
+	<div id="wrapper">
+		<div id="navbar">
+			<img src="{{MEDIA_URL}}img/escom.gif">
+			<div id='navbar-left'></div>
+			<div id='navbar-right'>
+				<div id="login">
+				
+				<p><span id="usuario-nombre">{% block nom-usuario %}{% endblock %}</span><br>
+				<span id="usuario-tipo">{% block tipo-usuario %}{% endblock %}</span>
+				<span id="usuario-id">{% block id-usuario %}{% endblock %}</span></p>
+				<p><a href="../../cerrar/">Cerrar Sesión</a></p>
+				</div>
+			</div>
+		</div>
+
+		<div id="content">
+
+			<div class="menu-left">
+
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="display: block; position:static; margin-bottom: 5px; width: 100%; ">
+					<!--Información Personal-->
+					<li class="dropdown-submenu"><a tabindex="-1" href="#">Gestion Profesores</a>
+								<ul class="dropdown-menu">
+									<li><a href="../Agregar_modificar_profesor">Agregar Profesor</a></li>
+									<li><a href="../buscarprof">Buscar Profesor</a></li>									
+								</ul>
+						</li>
+						<li class="divider"></li>
+					<li class="dropdown-submenu"><a tabindex="-1" href="#">Gestion Materias</a>
+								<ul class="dropdown-menu">
+									<li><a href="../abreMateria">Agregar Materia</a></li>	
+									 <li><a href="../abreBuscaMateria">Buscar Materia</a></li>							
+								</ul>
+						</li>
+						<li class="divider"></li>
+						
+						<li class="dropdown-submenu"><a tabindex="-1" href="../grupos/">Gestion Grupos</a>
+								<ul class="dropdown-menu">
+									<li><a href="../abrir_grupo">Agregar Grupo</a></li>
+									<!--li><a href="../alumnoCalifets">Buscar Grupo</a></li-->									
+								</ul>
+						</li>
+						<li class="divider"></li>
+						
+				<li class="dropdown-submenu"><a tabindex="-1" href="#">Gestion Alumnos</a>
+								<ul class="dropdown-menu">
+									<li><a href="../regAlumno">Agregar Alumno</a></li>
+									<li><a href="../buscarAlum">Buscar Alumno</a></li>	
+									<li><a href="../alumnoCorreo">Enviar correo a Alumnos</a></li>
+									{% if notif == 1 %}
+									<li><a href="../alumnoKardex">Actualizar Kardex</a></li>
+									{% endif %}																															
+								</ul>
+						</li>
+						<li class="divider"></li>
+				<li class="dropdown-submenu"><a tabindex="-1" href="#">Calendario</a>
+						<ul class="dropdown-menu">
+						<li><a href="../periodo_escolar">Periodo escolar</a></li>
+						<li><a href="../fechas_inscripciones">Inscripciones</a></li>
+						<li><a href="../fechas_ord">Evaluaciones ordinarias</a></li>									
+						<li><a href="../fechas_extra">Evaluaciones extraordinarias</a></li>									
+						<li><a href="../fechas_ets">Evaluaciones ETS</a></li>									
+						</ul>
+				</li>
+				<li class="divider"></li>
+				<li><a tabindex="-1" href="../documentos">Documentos solicitados</a></li>
+											
+				</ul>
+			</div>
+
+			<div class="content-principal">
+				<!--Area de trabajo-->
+
+				{% block contenido %}
+				{% endblock %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div class='spacer'>
+	</div>
+
+
+	<div id="footer">
+		<p>2013 Escuela Superior de Cómputo<a href="">Ayuda</a></p></div>
+	</div>
+
+
+</body>
+</html>

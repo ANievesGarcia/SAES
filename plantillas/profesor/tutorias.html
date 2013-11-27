@@ -1,0 +1,49 @@
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/profesor/tutoria.css">
+{% endblock %}
+
+{% block archivos_js  %}	
+{% endblock %}
+
+
+{%  block contenido %}
+
+<h1 id="titulo">Tutorías</h1>
+			
+			<table id="tabla-tutorias">
+			<tr>
+				<th>Número de Boleta</th>
+				<th>Nombre del Alumno</th>
+				
+			</tr>
+			{%for alumno in Tutorado %}
+			<tr>
+				<td>{{alumno}}</td>
+				<td class='nombre-alumno'>{{alumno.cve_usuario.nombre}} {{alumno.cve_usuario.apellidoPaterno}} {{alumno.cve_usuario.apellidoMaterno}}</td>
+			</tr>
+			{% endfor %}
+			
+			</table>
+			<br>
+			<div id='botones' class='center'>
+				<button class="1 btn" class="btn" onclick="location.href ='/profesor_agregar_tutorado'">Agregar Tutorado</button>
+
+				<button class="btn" onclick="location.href = '/profesor_tutorias_comentar'">Llenar comentarios</button>
+			</div>
+
+	
+		
+
+
+{% endblock %}
+
+
+	
+
+
+	
+
+	
+			

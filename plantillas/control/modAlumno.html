@@ -1,0 +1,79 @@
+{% extends "control/basectrl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+	
+	<div class="page-header">
+					<h2 align=center>Modificar alumno</h2>
+				</div>
+
+				<div class="show-content">
+						<div class="tab-content" align=center>
+							
+														
+							<div class="tab-pane active" id="modificarAlumno">
+								<form action="../modificarAlum/" method="POST">{% csrf_token %}
+								<table cellpadding="3">
+									<tr>
+										<td><label align="right"><strong>Nombre:</strong></label></td>
+										<td><input type="text" value="{{usuarios.nombre}}" name="nombre_alumno" pattern="^[a-zA-Z\s]*$" required></td>
+										
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Apellido paterno:</strong></label></td>
+										<td><input type="text" value="{{usuarios.apellidoPaterno}}" name="apellidoPaterno" pattern="^[a-zA-Z\s]*$" required></td>
+										
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Apellido materno:</strong></label></td>
+										<td><input type="text" value="{{usuarios.apellidoMaterno}}" name="apellidoMaterno" pattern="^[a-zA-Z\s]*$" required></td>
+										
+									</tr>
+
+									<tr>
+										<td><label align="right"><strong>Boleta:</strong></label></td>
+										<td><label id="clave" name="clave">{{usuarios.clave}}</label></td>
+	
+									</tr>
+
+									<tr>
+										<td><label align="right"><strong>Sexo:</strong></label></td>
+										<td><select value="{{usuarios.sexo}}" name="sexo">
+										<option value="M"> Masculino </option>
+										<option value="F"> Femenino </option>
+										</select></td>
+										
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Fecha de nacimiento:</strong></label></td>
+										<td><input type="date" value="{{usuarios.fecha_nac}}" name="fec_nac" required></td>
+										<input  id ="clave" name="key" value="si"  style='width:250px' hidden>
+										<input  value="{{usuarios.clave}}" name="clave" hidden>
+									</tr>
+
+															</table>
+								<input type="submit" class="btn btn-default" value="Guardar" name="fin_datgen" align=center>
+								</form>
+							</div>
+
+								
+
+							
+							
+							
+							
+							
+
+
+
+
+						</div>
+					</div>
+				</div>
+
+{% endblock %}
+
+				

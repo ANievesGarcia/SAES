@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SAES</title>
+    <link href="{{MEDIA_URL}}login/okendoken/css/application.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{MEDIA_URL}}login/ico/favicon.ico">
+<script src="{{MEDIA_URL}}js/jquery.js"></script>
+<script src="{{MEDIA_URL}}js/bootstrap.js"></script>
+<script src="{{MEDIA_URL}}js/bootbox.min.js"></script>
+<link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.css">
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+</head>
+<body>
+{% if mensaje == 1 %}
+            <script>
+                bootbox.alert("Usuario no encontrado");
+            </script>
+{% elif mensaje == 2 %}
+            <script>
+                bootbox.alert("Error al enviar email")
+            </script>
+{% elif mensaje == 3 %}
+            <script>
+                bootbox.alert("Se ha enviado un email con una constraseña temporal")
+            </script>
+{% elif mensaje == 4 %}
+            <script>
+                bootbox.alert("Debes llenar los campos")
+            </script>
+{% endif %}
+
+<div class="single-widget-container">
+    <section class="widget login-widget">
+        <header class="text-align-center">
+            <h4> SAES </h4>
+        </header>
+        <div class="body">
+
+             <form id='formulario' method='post' action=''>{% csrf_token %}
+                 {{formulario.clave_usuario}}
+                 <p><button class="btn btn-success" onclick="submit();">Confirmar</button>
+
+             </form>
+
+
+                    
+                </div>
+        <footer>
+            <div class="facebook-login">
+                <a href="#" id="mostrar_teclado"><span></span></a>
+            </div>
+        </footer>
+    </section>
+</div>
+
+
+</body>
+</html>

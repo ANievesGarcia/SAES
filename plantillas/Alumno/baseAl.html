@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+
+	<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.min.css">
+
+	
+	<script src="{{MEDIA_URL}}js/jquery.js"></script>
+<script src="{{MEDIA_URL}}js/script.js"></script>
+<script src="{{MEDIA_URL}}js/bootstrap.js"></script>
+<script src="{{MEDIA_URL}}js/bootstrap-dropdown.js"></script>
+
+<script src="{{MEDIA_URL}}js/bootbox.min.js"></script>
+<script src="{{MEDIA_URL}}js/horario.js"></script>
+<script src="{{MEDIA_URL}}js/formularios.js"></script>
+
+<link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.css">
+<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+<link rel="stylesheet" href="{{STATIC_URL}}css/inc.css">
+
+	<title>SAESCOM</title>
+</head>
+<body>
+	
+	<div id="header">
+		<img src="{{MEDIA_URL}}img/banner.png">
+	</div>
+
+	<div id="wrapper">
+		<div id="navbar">
+			<img src="{{MEDIA_URL}}img/escom.gif">
+			<div id='navbar-left'></div>
+			<div id='navbar-right'>
+				<div id="login">
+				
+				<p><span id="usuario-nombre">{% block nom-usuario %}{% endblock %}</span><br>
+				<span id="usuario-tipo">{% block tipo-usuario %}{% endblock %}</span>
+				<span id="usuario-id">{% block id-usuario %}{% endblock %}</span></p>
+				<p><a href="/../cerrar/">Cerrar Sesión</a></p>
+				</div>
+			</div>
+		</div>
+
+		<div id="content">
+
+			<div class="menu-left">
+
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="display: block; position:static; margin-bottom: 5px; width: 100%; ">
+					<!--Información Personal-->
+						<li><a tabindex="-1" href="../alumnoDatosGen">Datos generales</a></li>
+						<li class="divider"></li>
+
+					<!--Información Académica-->
+						<li><a tabindex="-1" href="../alumnoKardex">Kárdex</a></li>
+						<li class="divider"></li>
+
+						<li><a tabindex="-1" href="../alumnoHorario">Horario de clases</a></li>
+						<li class="divider"></li>
+						
+						<li class="dropdown-submenu"><a tabindex="-1" href="#">Calificaciones</a>
+								<ul class="dropdown-menu">
+									<li><a href="../alumnoCalifsemestre">Semestre actual</a></li>
+									<li><a href="../alumnoCalifets">ETS</a></li>
+									<li><a href="../alumnoCalifsaberes">Saberes Previamente Adquiridos</a></li>
+								</ul>
+						</li>
+						<li class="divider"></li>
+
+					<!--Inscripción-->
+						<li class="dropdown-submenu"><a tabindex="-1" href="#">Inscripciones</a>
+								<ul class="dropdown-menu">
+									{% if cita <= hora and inscrito == 0 %}
+									<li><a href="../Alinscribirsemestre">Semestre</a></li>
+									{% endif %}
+									{% if cita > hora %}
+									<li><a href="../Alcita">Cita de Reinscripción</a></li>
+									{% endif %}
+									<li><a href="../alumnoInscEts">ETS</a></li>
+									<li><a href="../alumnoInscSaberes">Saberes Previamente Adquiridos</a></li>									
+								</ul>
+
+						</li>
+						<li class="divider"></li>
+
+					<!--Otras opciones-->
+						<li><a tabindex="-1" href="../alumnoTutor">Tutor</a></li>
+						<li class="divider"></li>
+						
+						<li><a tabindex="-1" href="../alumnoSolicitardocs">Solicitar documentos</a></li>
+						<li class="divider"></li>
+						
+						<li><a tabindex="-1" href="../alumnoEvaluarprofs">Evaluar profesores</a></li>
+						<li class="divider"></li>
+						
+						
+						<li><a tabindex="-1" href="../alumnoCambiarpass">Cambiar contraseña</a></li>
+				</ul>
+			</div>
+
+			<div class="content-principal">
+				<!--Area de trabajo-->
+
+				{% block contenido %}
+				{% endblock %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div class='spacer'>
+	</div>
+
+
+	<div id="footer">
+		<p>2013 Escuela Superior de Cómputo<a href="">Ayuda</a></p></div>
+	</div>
+
+
+</body>
+</html>

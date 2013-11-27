@@ -1,0 +1,19 @@
+{% extends "control/basectrl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+	
+	<div class="hero-unit" style="background-color: #ffffff">
+		{% if vera == 1 %}
+			<script>
+				bootbox.alert("Se ha agregado correctamente al profesor")
+			</script>
+		{% endif %}
+		<h1>Hola {{bol.nombre}},</h1>
+		<p>Bienvenido!</p>
+	</div>
+
+{% endblock %}

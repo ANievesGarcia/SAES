@@ -1,0 +1,90 @@
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+
+        
+{% endblock %}
+
+{%  block contenido %}
+
+        <div class="show-content">
+
+                <div class="page-header">
+                        <h2>Cambiar contraseña</h2>
+                </div>
+                
+                <script>
+                function validacion(formulario){
+                        var er_pass= /(^([A-Z]{4,4}[0-9]{2,2})|^([a-z]{4,4}[0-9]{2,2}))/  
+                        var er_actpass=/^$/
+                        if(!er_actpass.test(formulario.passact.value)){
+                                if(!er_pass.test(formulario.passnuevo.value)){
+                                        bootbox.alert("Ingresa formato correcto para nueva contraseña (4 letras y 2 números)")
+                                        return false
+                                }
+                        }
+                        else{
+                                return true
+                        }
+                }
+                </script>
+
+                {% if notif == 4 %}
+                        <script>
+                                bootbox.alert("Llena todos los campos")
+                        </script>
+
+                {% elif notif == 1 %}
+                        <script>
+                                bootbox.alert("Contraseña modificada")
+                        </script>
+                
+                {% elif notif == 2 %}
+                        <script>
+                                bootbox.alert("Contraseña actual incorrecta")
+                        </script>
+
+                {% elif notif == 3 %}
+                        <script>
+                                bootbox.alert("Contraseñas nuevas no coinciden")
+                        </script>
+
+                {% endif %}
+
+                
+                <form onsubmit="return validacion(this)" name="validaciones" action="/cambiarPass/" method="POST">{% csrf_token %}
+
+                <div align="center">
+                        <div class="control-group">
+                                <label class="control-label" for="actual">Contraseña actual:</label>
+                                <div class="controls">
+                                <input type="password" id="actual" name="passact">
+                                </div>
+                        </div>
+                        
+                        <div class="control-group">
+                                <label class="control-label" for="nueva">Contraseña nueva:</label>
+                                <div class="controls">
+                                <input type="password" id="nueva" name="passnuevo">
+                                </div>
+                        </div>
+                        
+                        <div class="control-group">
+                                <label class="control-label" for="nueva">Confirma contraseña nueva:</label>
+                                <div class="controls">
+                                <input type="password" id="nueva" name="con-passnuevo">
+                                <br>
+                                <br>
+                                <input class="btn" type="submit" name="cambiarpass" value="Cambiar contraseña" onclick="">
+                                </div>
+                        </div>
+                </div>
+
+                </form>
+                
+
+        </div>
+                        
+                                
+{% endblock %}

@@ -1,0 +1,79 @@
+
+{% extends "control/basectrl.html" %}
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+
+{% endblock %}
+
+{%  block contenido %}
+
+<!-- area de trabajo -->
+<link type="text/css" href="../demoengine/demoengine.css" rel="stylesheet">
+	<script type="text/javascript" src="../demoengine/demoengine.js" async defer></script>
+	<title>jQuery UI Datepicker: Using Datepicker to Select Date Range</title>
+	<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+	<style type="text/css">
+		.dp-highlight .ui-state-default {
+			background: #484;
+			color: #FFF;
+		}
+	</style>
+	
+	
+	
+			
+			<div class="show-content">			
+			<center>
+			<h1 id='titulo'>Fechas de periodo escolar</h1>
+			</center>
+			<br>
+			<br>
+			<form method="POST" action="../modificar_periodo/">	{% csrf_token %}	
+			<center>
+			<div id="datepicker"></div>
+			
+			<p>
+				<br>
+				<br>
+				Fecha de inicio de periodo escolar:
+				<input type="text" id="input1" value="{{fechas.inicperiodo}}" name="inic" size="10" readonly>
+				<br>
+				<br>				
+				Fecha de fin de periodo escolar:
+				<input type="text" id="input2" value="{{fechas.finperiodo}}" name="fin" size="10" readonly>
+			</p>
+			
+			
+			<br>			
+			<input class="btn" type="submit" value="Modificar" onclick="">
+			</center>
+			</form>
+								
+					
+			
+			{% if notif == 3 %}
+				<script>
+				bootbox.alert("Por favor ingresa un elemento a buscar")			
+					
+				</script>
+						
+			{% elif notif == 2 %}
+				<script>
+						bootbox.alert("El elemento no existe")
+				</script>
+			{% elif notif == 1 %}
+				<script>
+						bootbox.alert("Fecha modificada correctamente")
+				</script>
+			{% endif %}								
+			</div>	
+
+{% endblock %}
+
+	
+			

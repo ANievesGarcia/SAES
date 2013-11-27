@@ -1,0 +1,393 @@
+{% extends "Alumno/baseAl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+	
+	<div class="page-header">
+					<h2>Datos generales</h2>
+				</div>
+
+				{% if notif == 1 %}
+				<script>
+					bootbox.alert("Información actualizada", function(){window.location='../alumnoDatosGen'})
+				</script>
+				{% endif %}
+
+				<script>
+				function check(input) {
+					if(input.validity.patternMismatch){  
+						input.setCustomValidity("Formato incorrecto.");  
+					}  
+					else {  
+						input.setCustomValidity("");  
+					}                 
+				}  
+				</script>
+
+				<div class="show-content">
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							{%if aux == 0 or aux == 1%}
+							<li class="active"><a href="#datosgen" data-toggle="tab">Generales</a></li>							
+							<li><a href="#nac" data-toggle="tab">Nacimiento</a></li>
+							<li><a href="#dir" data-toggle="tab">Dirección</a></li>
+							<li><a href="#esc" data-toggle="tab">Escolaridad</a></li>
+							<li><a href="#tutor" data-toggle="tab">Padre/Tutor</a></li>
+
+							{% elif aux == 2 %}
+							<li><a href="#datosgen" data-toggle="tab">Generales</a></li>							
+							<li class="active"><a href="#nac" data-toggle="tab">Nacimiento</a></li>
+							<li><a href="#dir" data-toggle="tab">Dirección</a></li>
+							<li><a href="#esc" data-toggle="tab">Escolaridad</a></li>
+							<li><a href="#tutor" data-toggle="tab">Padre/Tutor</a></li>
+
+							{% elif aux == 3 %}
+							<li><a href="#datosgen" data-toggle="tab">Generales</a></li>							
+							<li><a href="#nac" data-toggle="tab">Nacimiento</a></li>
+							<li class="active"><a href="#dir" data-toggle="tab">Dirección</a></li>
+							<li><a href="#esc" data-toggle="tab">Escolaridad</a></li>
+							<li><a href="#tutor" data-toggle="tab">Padre/Tutor</a></li>
+
+							{% elif aux == 5 %}
+							<li><a href="#datosgen" data-toggle="tab">Generales</a></li>							
+							<li><a href="#nac" data-toggle="tab">Nacimiento</a></li>
+							<li><a href="#dir" data-toggle="tab">Dirección</a></li>
+							<li><a href="#esc" data-toggle="tab">Escolaridad</a></li>
+							<li class="active"><a href="#tutor" data-toggle="tab">Padre/Tutor</a></li>
+
+							{% endif %}
+						</ul>
+
+						<div class="tab-content" align="center">
+							
+							{% if aux == 0 %}							
+							<div class="tab-pane active" id="datosgen">
+								<form action="" method="POST">{% csrf_token %}
+								<table cellpadding="10">
+									<tr>
+										<td align="right"><label><strong>Boleta:</strong></label></td>
+										<td><label id="al-boleta">{{bol}}</label></td>
+									</tr>									
+									<tr>
+										<td><label align="right"><strong>Nombre:</strong></label></td>
+										<td><label id="al-nombre">{{nombreCompleto}}</label></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>CURP:</strong></label></td>
+										<td><label id="al-curp">{{bol.curp}}</label></td>
+									</tr>
+									<!--<tr>
+										<td><label align="right"><strong>RFC:</strong></label></td>
+										<td><label id="al-rfc"></label></td>
+									</tr>-->
+									<tr>
+										<td><label align="right"><strong>Sexo:</strong></label></td>
+										<td><label id="al-sexo">{{sexo}}</label></td>
+									</tr>
+								</table>
+								<input type="submit" class="btn btn-default" value="Modificar" name="mod_datgen">
+								</form>
+							</div>
+
+							{% elif aux == 1 %}
+							<div class="tab-pane active" id="datosgen">
+								<form action="../actualizarInfo/" method="POST">{% csrf_token %}
+								<table cellpadding="10">
+									<tr>
+										<td align="right"><label><strong>Boleta:</strong></label></td>
+										<td><label id="al-boleta">{{bol}}</label></td>
+									</tr>									
+									<tr>
+										<td><label align="right"><strong>Nombre:</strong></label></td>
+										<td><label id="al-nombre">{{nombreCompleto}}</label></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>CURP*:</strong></label></td>
+										<td><input type="text" value="{{bol.curp}}" name="al_curp" pattern="^[a-zA-Z]{4}\d{6}[a-zA-Z]{6}\d{2}$" oninput="check(this)" title="Ingresa una CURP válida." required></td>
+									</tr>
+									<!--<tr>
+										<td><label align="right"><strong>RFC:</strong></label></td>
+										<td><input type="text" value="" name="al_frc"></td>
+									</tr>-->
+									<tr>
+										<td><label align="right"><strong>Sexo:</strong></label></td>
+										<td><label id="al-sexo">{{sexo}}</label></td>
+									</tr>
+								</table>
+
+								<div align="center" style="padding-bottom:20px; padding-top:20px;">
+									<small>* Campos obligatorios</small>
+								</div>
+
+								<input type="submit" class="btn btn-default" value="Guardar" name="fin_datgen">
+								</form>
+							</div>
+
+							{% endif %}						
+
+
+							<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+							{% if aux == 0  %}
+							<div class="tab-pane" id="nac">
+								<form action="" method="POST">{% csrf_token %}
+								<table cellpadding="10">
+									<tr>
+										<td align="right"><label><strong>Fecha de nacimiento:</strong></label></td>
+										<td><label id="al-nacimiento">{{bol.fecha_nac}}</label></td>
+									</tr>									
+									<tr>
+										<td><label align="right"><strong>Nacionalidad:</strong></label></td>
+										<td><label id="al-nacionalidad">{{bol.nacionalidad}}</label></td>
+									</tr>
+									<!--<tr>
+										<td><label align="right"><strong>Entidad de nacimiento:</strong></label></td>
+										<td><label id="al-entidadnac"></label></td>
+									</tr>-->
+								</table>
+
+								<input type="submit" class="btn btn-default" value="Modificar" name="mod_nac">
+								</form>
+							</div>
+
+							{% elif aux == 2 %}
+							<div class="tab-pane active" id="nac">
+								<form action="../actualizarInfo/" method="POST">{% csrf_token %}
+								<table cellpadding="10">
+									<tr>
+										<td align="right"><label><strong>Fecha de nacimiento:</strong></label></td>
+										<td><label id="al-nacimiento">{{bol.fecha_nac}}</label></td>				
+									</tr>									
+									<tr>
+										<td><label align="right"><strong>Nacionalidad:</strong></label></td>
+										<td><input type="text" value="{{bol.nacionalidad}}" name="al_nacionalidad" pattern="^[a-zA-Z\s]*$" oninput="check(this)"></td>
+									</tr>
+									<!--<tr>
+										<td><label align="right"><strong>Entidad de nacimiento:</strong></label></td>
+										<td><input type="text" value="" name="al_frc"></td>
+									</tr>-->
+								</table>
+
+								<input type="submit" class="btn btn-default" value="Guardar" name="fin_nac">
+								</form>
+							</div>
+
+							{% endif %}
+
+							<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+							{% if aux == 0 %}
+							<div class="tab-pane" id="dir">
+								<form action="" method="POST">{% csrf_token %}
+								<table cellpadding="3">
+									<tr>
+										<td align="right"><label><strong>Calle:</strong></label></td>
+										<td><label id="al-calle">{{bol.calle}}</label></td>
+									</tr>									
+									<tr>
+										<td><label align="right"><strong>Número:</strong></label></td>
+										{%if bol.num == None %}
+										<td><label id="al-numint"></label></td>
+										{% else %}
+										<td><label id="al-numint">{{bol.num}}</label></td>
+										{% endif %}
+									</tr>
+									<!--<tr>
+										<td><label align="right"><strong>Número ext:</strong></label></td>
+										<td><label id="al-numext"></label></td>
+									</tr>-->
+									<tr>
+										<td><label align="right"><strong>Colonia:</strong></label></td>
+										<td><label id="al-colonia">{{bol.colonia}}</label></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>C.P.:</strong></label></td>
+										{% if bol.cp == None %}
+										<td><label id="al-cp"></label></td>
+										{% else %}
+										<td><label id="al-cp">{{bol.cp}}</label></td>
+										{% endif %}
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Estado:</strong></label></td>
+										<td><label id="al-edo">{{bol.estado}}</label></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Del/Mun:</strong></label></td>
+										<td><label id="al-delmun">{{bol.municipio_o_delegacion}}</label></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Teléfono:</strong></label></td>
+										<td><label id="al-tel">{{bol.Telefono_Casa}}</label></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Móvil:</strong></label></td>
+										{% if bol.Telefono_Celular == None %}
+										<td><label id="al-movil"></label></td>
+										{% else %}
+										<td><label id="al-movil">{{bol.Telefono_Celular}}</label></td>
+										{% endif %}
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Email:</strong></label></td>
+										<td><label id="al-email">{{bol.email_institucional}}</label></td>
+									</tr>
+								</table>
+
+								<input type="submit" class="btn btn-default" value="Modificar" name="mod_dir">
+								</form>
+							</div>
+
+							{% elif aux == 3 %}
+							<div class="tab-pane active" id="dir">
+								<form action="../actualizarInfo/" method="POST">{% csrf_token %}
+
+								<div style="float:left;">
+								<table cellpadding="3">
+									<tr>
+										<td align="right"><label><strong>Calle:</strong></label></td>
+										<td><input type="text" value="{{bol.calle}}" name="al_calle"></td>
+									</tr>									
+									<tr>
+										<td><label align="right"><strong>Número:</strong></label></td>
+										{%if bol.num == None %}
+										<td><input type="text" value="" name="al_numint" pattern="\d+" oninput="check(this)" title="Solo números."></td>
+										{% else %}
+										<td><input type="text" value="{{bol.num}}" name="al_numint" pattern="\d+" oninput="check(this)" title="Solo números."></td>
+										{% endif %}
+									</tr>
+									<!--<tr>
+										<td><label align="right"><strong>Número ext:</strong></label></td>
+										<td><input type="text" value="" name="al_numext"></td>
+									</tr>-->
+									<tr>
+										<td><label align="right"><strong>Colonia:</strong></label></td>
+										<td><input type="text" value="{{bol.colonia}}" name="al_colonia"></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>C.P.:</strong></label></td>
+										{% if bol.cp == None %}
+										<td><input type="text" value="" name="al_cp" pattern="\d{5}" oninput="check(this)" title="Solo números (5 dígitos)."></td>
+										{% else %}
+										<td><input type="text" value="{{bol.cp}}" name="al_cp" pattern="\d{5}" oninput="check(this)" title="Solo números (5 dígitos)."></td>
+										{% endif %}
+									</tr>
+									
+								</table>
+								</div>
+								<div style="float:rigth;">
+								<table cellpadding="3">
+									<tr>
+										<td><label align="right"><strong>Estado:</strong></label></td>
+										<td><input type="text" value="{{bol.estado}}" name="al_estado" pattern="^[a-zA-Z\s]*$" oninput="check(this)" title="Solo letras."></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Del/Mun:</strong></label></td>
+										<td><input type="text" value="{{bol.municipio_o_delegacion}}" name="al_delmun"></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Teléfono*:</strong></label></td>
+										<td><input type="text" value="{{bol.Telefono_Casa}}" name="al_tel" pattern="(\+?\d[- .]*){8}" oninput="check(this)" title="Solo números (8 dígitos)." required></td>
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Móvil:</strong></label></td>
+										{% if bol.Telefono_Celular == None %}
+										<td><input type="text" value="" name="al_movil" pattern="(\+?\d[- .]*){10}" oninput="check(this)" title="Solo números (10 dígitos)."></td>
+										{% else %}
+										<td><input type="text" value="{{bol.Telefono_Celular}}" name="al_movil" pattern="(\+?\d[- .]*){10}" oninput="check(this)"  title="Solo números (10 dígitos)."></td>
+										{% endif %}
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Email*:</strong></label></td>
+										<td><input type="text" value="{{bol.email_institucional}}" name="al_email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"  oninput="check(this)" title="Ingresa un email válido" required></td>
+									</tr>
+								</table>
+								</div>
+
+								<div align="center" style="padding-bottom:20px; padding-top:20px;">
+									<small>* Campos obligatorios</small>
+								</div>
+
+								<input type="submit" class="btn btn-default" value="Guardar" name="fin_dir">
+								</form>
+							</div>
+
+							{% endif %}
+
+							<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+							
+							<div class="tab-pane" id="esc">
+								<form action="" method="POST">{% csrf_token %}
+								<table cellpadding="10">
+									<tr>
+										<td align="right"><label><strong>Escuela de procedencia:</strong></label></td>
+										<td><label id="al-escproc">{{bol2.escuela_procedencia}}</label></td>
+									</tr>									
+									<!--<tr>
+										<td><label align="right"><strong>Localidad escuela:</strong></label></td>
+										<td><label id="al-locescproc"></label></td>
+									</tr>-->
+									<tr>
+										<td><label align="right"><strong>Promedio bachillerato:</strong></label></td>
+										<td><label id="al-promnms">{{bol2.promedio_escuela_procedencia}}</label></td>
+									</tr>
+								</table>
+
+								</form>
+							</div>
+
+							<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+							{% if aux == 0 %}
+							<div class="tab-pane" id="tutor">
+								<form action="" method="POST">{% csrf_token %}
+								<table cellpadding="10">
+									<tr>
+										<td align="right"><label><strong>Nombre de tutor:</strong></label></td>
+										<td><label id="al-nomtutor">{{bol2.tutor_legal}}</label></td>
+									</tr>									
+									<!--<tr>
+										<td><label align="right"><strong>RFC tutor:</strong></label></td>
+										<td><label id="al-rfctutor"></label></td>
+									</tr>-->
+								</table>
+
+								<input type="submit" class="btn btn-default" value="Modificar" name="mod_tutor">
+								</form>
+							</div>
+
+							{% elif aux == 5 %}
+							<div class="tab-pane active" id="tutor">
+								<form action="../actualizarInfo/" method="POST">{% csrf_token %}
+								<table cellpadding="10">
+									<tr>
+										<td align="right"><label><strong>Nombre de tutor:</strong></label></td>
+										<td><input type="text" value="{{bol2.tutor_legal}}" name="al_tutor" pattern="^[a-zA-Z\s]*$" oninput="check(this)" title="Ingresa un nombre válido"></td>
+									</tr>									
+									<!--<tr>
+										<td><label align="right"><strong>RFC tutor:</strong></label></td>
+										<td><input type="text" value="" name="al_rfctutor"></td>
+									</tr>-->
+								</table>
+
+								<input type="submit" class="btn btn-default" value="Guardar" name="fin_tutor">
+								</form>
+
+							</div>
+
+							{% endif %}
+
+							<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+						</div>
+					</div>
+				</div>
+
+{% endblock %}
+
+				

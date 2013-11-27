@@ -1,0 +1,29 @@
+
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+
+	
+{% endblock %}
+
+{%  block contenido %}
+			
+				<h1>Calificaciones Extraordinarias</h1></br>
+					<h2>Grupos</h2></br>
+				
+				<center>
+			<Form method="GET" action='/profesor_ingresa_calificacion_extra'>
+				<P>Elija el grupo a evaluar
+				<select id="materia" name="materia">
+					{%for grupo in grupolist %}
+						<option value={{grupo.id}}> {{ grupo.materia.nombre}} {{grupo.grupo.cve_grupo}} </option>
+					{% endfor %}
+				</select>
+				<br>
+				
+					<input class="btn" type="submit" value="Seleccionar"/>
+
+			</Form>
+		</center>
+		
+{% endblock %}

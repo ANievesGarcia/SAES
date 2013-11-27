@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="{{MEDIA_URL}}js/script.js"></script>
+	<link rel="stylesheet" href="{{MEDIA_URL}}css/style.css">
+
+	<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.min.css">
+	
+	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}js/bootstrap.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}js/bootstrap.min.js"></script>
+	<!--<script type="text/javascript">
+	 	$(".dropdown-toggle").dropdown-toggle
+	</script>-->
+	
+
+	<title>SAESCOM</title>
+</head>
+<body>
+
+	<div class="contenedor-iframe">
+
+		<div class="page-header">
+			<h2>Kárdex</h2>
+		</div>
+
+		{%  if len1 == 0 and len2 == 0 and len3 == 0 and len4 == 0 and len5 == 0 %}
+
+		<div align="center">
+			<p class="text-info">Kárdex no disponible</p>
+		</div>
+
+		{% else %}
+
+		<div class="form-inline" style="margin-left: 500px;">
+			<label><strong>Promedio: {{promedio}}</strong></label>
+			<label></label>
+		</div>
+
+		{% if len1 != 0 %}
+
+		<div class="table table-condensed" align="center" style="margin-top: 30px;">
+			<p class="text-info">Primer Nivel</p>
+			<table>
+				<thead>					
+					<tr>
+						<th>Clave</th>
+						<th>Materia</th>
+						<th>Periodo</th>
+						<th>Evaluación</th>
+						<th>Calificación</th>
+					</tr>
+				</thead>				
+
+				<tbody>					
+					{% for alumno in nivel1 %}
+					<tr>
+						<td>{{alumno.materia.cve_materia}}</td>
+						<td>{{alumno.materia.nombre}}</td>
+						<td>{{alumno.periodo}}</td>
+						<td>{{alumno.evaluacion}}</td>
+						<td>{{alumno.calificacion}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		{% endif %}
+
+		{% if len2 != 0 %}
+
+		<div class="table table-condensed" align="center" style="margin-top: 30px;">
+			<p class="text-info">Segundo Nivel</p>
+			<table>
+				<thead>					
+					<tr>
+						<th>Clave</th>
+						<th>Materia</th>
+						<th>Periodo</th>
+						<th>Evaluación</th>
+						<th>Calificación</th>
+					</tr>
+				</thead>				
+
+				<tbody>					
+					{% for alumno in nivel2 %}
+					<tr>
+						<td>{{alumno.materia.cve_materia}}</td>
+						<td>{{alumno.materia.nombre}}</td>
+						<td>{{alumno.periodo}}</td>
+						<td>{{alumno.evaluacion}}</td>
+						<td>{{alumno.calificacion}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		{% endif %}
+
+		{% if len3 != 0 %}
+
+		<div class="table table-condensed" align="center" style="margin-top: 30px;">
+			<p class="text-info">Tercer Nivel</p>
+			<table>
+				<thead>					
+					<tr>
+						<th>Clave</th>
+						<th>Materia</th>
+						<th>Periodo</th>
+						<th>Evaluación</th>
+						<th>Calificación</th>
+					</tr>
+				</thead>				
+
+				<tbody>					
+					{% for alumno in nivel3 %}
+					<tr>
+						<td>{{alumno.materia.cve_materia}}</td>
+						<td>{{alumno.materia.nombre}}</td>
+						<td>{{alumno.periodo}}</td>
+						<td>{{alumno.evaluacion}}</td>
+						<td>{{alumno.calificacion}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		{% endif %}
+
+		{% if len4 != 0 %}
+
+		<div class="table table-condensed" align="center" style="margin-top: 30px;">
+			<p class="text-info">Cuarto Nivel</p>
+			<table>
+				<thead>					
+					<tr>
+						<th>Clave</th>
+						<th>Materia</th>
+						<th>Periodo</th>
+						<th>Evaluación</th>
+						<th>Calificación</th>
+					</tr>
+				</thead>				
+
+				<tbody>					
+					{% for alumno in nivel4 %}
+					<tr>
+						<td>{{alumno.materia.cve_materia}}</td>
+						<td>{{alumno.materia.nombre}}</td>
+						<td>{{alumno.periodo}}</td>
+						<td>{{alumno.evaluacion}}</td>
+						<td>{{alumno.calificacion}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		{% endif %}
+
+		{% if len5 != 0 %}
+
+		<div class="table table-condensed" align="center" style="margin-top: 30px;">
+			<p class="text-info">Quinto Nivel</p>
+			<table>
+				<thead>					
+					<tr>
+						<th>Clave</th>
+						<th>Materia</th>
+						<th>Periodo</th>
+						<th>Evaluación</th>
+						<th>Calificación</th>
+					</tr>
+				</thead>				
+
+				<tbody>					
+					{% for alumno in nivel5 %}
+					<tr>
+						<td>{{alumno.materia.cve_materia}}</td>
+						<td>{{alumno.materia.nombre}}</td>
+						<td>{{alumno.periodo}}</td>
+						<td>{{alumno.evaluacion}}</td>
+						<td>{{alumno.calificacion}}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		{% endif %}
+
+
+	<form action="../reporteKardex/" method="POST">{% csrf_token %}	
+		<div class="alin-der">
+			<input class="btn" type="submit" name="reporteKardex" value="Imprimir Kárdex"/>
+		</div>
+	</form>
+
+	{% endif %}
+	</div>
+
+</body>
+</html>

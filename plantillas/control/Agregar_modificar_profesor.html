@@ -1,0 +1,234 @@
+{% extends "control/basectrl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+	
+	<div style="background-color: #ffffff;margin:center;width:790px;height:550px;overflow-y:scroll">
+		<h1 id='titulo'>Agregar Profesor</h1>
+		<br>		
+		<h3>Introduzca los siguientes datos del nuevo profesor</h3>		
+		{% if vera == 2 %}
+			<script>
+				bootbox.alert("Error en la base")
+			</script>
+		{% endif %}
+		<form method = "POST" action ="../agregar_nuevo/" >{% csrf_token %}
+			<table>
+				<tr>
+					<td colspan='2'><h4>Información Personal</h4></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Nombre</td>
+					<td><input type="text" name="nombre" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Apellido Paterno</td>
+					<td><input type="text" name="Apellido_Paterno" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Apellido Materno</td>
+					<td><input type="text" name="Apellido_Materno" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>CURP</td>
+					<td><input type="text" name="CURP" title="ejemplo: CAHE920521HDFMR003" pattern="|^[A-Z]{4}\d{6}[A-Z0-9]{8}$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Sexo</td>
+					<td>
+						<select name='Sexo'>
+							<option value='M'>Masculino</option>
+							<option value='F'>Femenino</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Nacionalidad</td>
+					<td><input type="text" name="Nacionalidad" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Estado</td>
+					<td><input type="text" name="Estado" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Municipio o delegación</td>
+					<td><input type="text" name="municipio_o_delegacion" title="Solo letras" pattern="|^[a-zA-Z \.ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Colonia</td>
+					<td><input type="text" name="colonia" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Calle</td>
+					<td><input type="text" name="calle" required="required"></td>
+				</tr>
+				<tr>
+					<td>Numero</td>
+					<td><input type="text" name="numero" title="Solo números y máximo 4" pattern="|^\d{1,4}$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>lote</td>
+					<td><input type="text" name="lote" title="Solo números y máximo 4" pattern="|^\d{1,4}$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Manzana</td>
+					<td><input type="text" name="manzana" title="Solo números y máximo 4" pattern="|^\d{1,4}$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>C.P.</td>
+					<td><input type="text" name="cp" title="Solo números y forzosamente 5" pattern="|^\d{5}$|" required="required"></td>
+				</tr>			
+				<tr>
+					<td>Telefono de Casa</td>
+					<td><input type="tel" name="telefono_Casa" required="required" title="ejemplo: 5522334466" pattern="|^(55)\d{8}$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Telefono Celular</td>
+					<td><input type="tel" name="telefono_Celular" title="ejemplo: 0445522334466" pattern="|^(04455)\d{8}$|"></td>
+				</tr>
+				<tr>
+					<td>Número de Seguro Social</td>
+					<td><input type="text" name="numero_ss" title="Solo números" pattern="|^(\d)*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Institución de Seguro Social</td>
+					<td>
+						<select name='inst_ss'>
+							<option value='1'>IMSS</option>
+							<option value='2'>ISSTE</option>
+							<option value='3'>Seguro Popular</option>
+							<option value='4'>No tiene</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Seguro Médico</td>
+					<td><input type="text" name="SeguroMedico"></td>
+				</tr>
+				<tr>
+					<td>Tipo de Sangre</td>
+					<td>
+						<select name='tipo_sangre'>
+							<option value='1'>O+</option>
+							<option value='2'>O-</option>
+							<option value='3'>A+</option>
+							<option value='4'>A-</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Fecha de Nacimiento</td>
+					<td><input type="text" name="fecha_nac" title="La fecha debe tener el siguiente formado YYYY-MM-dd" pattern="|^\d{4}-\d{2}-\d{2}$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Correo Institucional</td>
+					<td><input type="email" name="email_institucional" placeholder="ejemplo@dominio.com" required="required" autofocus="autofocus" maxlength="50"></td>
+				</tr>
+				<tr>
+					<td>Correo Personal</td>
+					<td><input type="email" name="email_personal" placeholder="ejemplo@dominio.com" required="required" autofocus="autofocus" maxlength="50"></td>
+				</tr>
+				<tr>
+					<td>Enfermedades</td>
+					<td><input type="text" name="enfermedades" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|"></td>
+				</tr>
+				<tr>
+					<td>Alergias</td>
+					<td><input type="text" name="alergias" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|"></td>
+				</tr>
+				<tr>
+					<td>Foto</td>
+					<td><input type="text" name="foto"></td>
+				</tr>	
+				<tr>
+					<td colspan='2'><h4>Información Escolar</h4></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Estatus</td>
+					<td>
+						<select name='Estatus'>
+							<option value='1'>Activo</option>
+							<option value='2'>Sabatico</option>
+							<option value='3'>Estudiando</option>
+							<option value='4'>Incapacidad</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Tipo</td>
+					<td>
+						<select name='tipo'>
+							<option value='1'>Base</option>
+							<option value='2'>Interino</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Salario</td>
+					<td><input type="text" name="salario" title="Solo números" pattern="|^((\d)|(\d\.\d))*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Grado de Estudios</td>
+					<td>
+						<select name='grado_estudios'>
+								<option value='1'>Doctorado</option>
+								<option value='2'>Maestria</option>
+								<option value='3'>Ingenieria</option>
+								<option value='4'>Licenciatura</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Carrera</td>
+					<td><input type="text" name="carrera" title="Solo letras" pattern="|^[a-zA-Z ñÑáéíóúüç]*$|" required="required"></td>
+				</tr>
+				<tr>
+					<td>Horario</td>
+					<td>
+						<select name='horario'>
+								<option value='1'>7:00hrs a 15:00hrs</option>
+								<option value='2'>15:00hrs a 21:00hrs</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Departamento</td>
+					<td>
+						<select name='depto'>
+							<option value='1'>Basicas</option>
+							<option value='3'>Ingenieria en Sistemas C</option>
+							<option value='4'>Computacion</option>
+							<option value='5'>Formacion Integral e Inst</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Laboratorio por cuidar</td>
+					<td>
+						<select name='laboratorio_cuidar'>
+							<option value='1'>Sistemas I</option>
+							<option value='2'>Sistemas II</option>
+							<option value='3'>Sistemas III</option>
+							<option value='4'>Redes</option>
+							<option value='5'>Digitales I</option>
+							<option value='6'>Digitales II</option>
+							<option value='7'>Electrónica</option>
+							<option value='8'>Fisica</option>
+							<option value='9'>Ninguno</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2'><input class="btn" type="submit" value="Guardar"/></td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+{% endblock %}

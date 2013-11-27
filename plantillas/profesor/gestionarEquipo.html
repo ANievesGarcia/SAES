@@ -1,0 +1,102 @@
+
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+
+	
+{% endblock %}
+
+{%  block contenido %}
+			
+				<h1>Gestión de equipo de Laboratorio</h1></br>
+					<h2>Laboratorio: {{es_laboratorista.tipo}} {{es_laboratorista.numero}}</h2></br>
+
+				{% if mensaje == 1 %}
+					<script>
+					bootbox.alert('Cambios guardados correctamente')
+					
+					</script>
+
+				{% elif mensaje == 2 %}
+					<script>
+					
+					</script>
+				{% endif %}
+
+				<center>
+			
+				<br><br>			
+
+				<Form method="GET" action='/modificarEquipo'>
+				
+				<table id='tabla-materias-profesor' class="">
+						<tr>
+							<th>Nombre</th>
+							<th>Número de serie</th>
+							<th>Descripcion Equipo</th>
+							<th></th>
+							<th>Estatus</th>
+							<th>Observaciones</th>
+							<th></th>
+						</tr>
+						{%for equipo in equipos %}
+							<tr>
+								<td>{{equipo.nombreEquipo}}</td>
+								<td name="ser" id="ser">{{equipo.numero_serie}}</td>
+								<td>{{equipo.descripcionEquipo}}<td>
+								<td>
+								{% if equipo.status in 'Activo'%}
+								<select id="materia" name="{{equipo.numero_serie}}{{equipo.nombreEquipo}}" >
+									<option selected value="Activo">Activo</option>
+									<option value="Reparacion" >Reparacón</option>
+								</select>
+								{% elif equipo.status in 'Reparacion' %}
+								<select id="materia" name="{{equipo.numero_serie}}{{equipo.nombreEquipo}}" >
+									<option  value="Activo">Activo</option>
+									<option selected value="Reparacion" >Reparacón</option>
+								</select>
+								{% endif %}
+								</td>
+								<td><input name="{{equipo.numero_serie}}" id="{{equipo.numero_serie}}" type="text" value="{{equipo.observaciones}}"></td>
+							<td class="eliminar"><input class="eliminar" type="submit" value="Eliminar"/></td>
+
+							</tr>
+						{% endfor %}
+					</table>
+			<br>
+					<input class="btn" type="submit" value="Guardar"/>
+			</form>
+			<button class="1 btn" class="btn" onclick="location.href ='/profesor_agregar_equipo'">Agregar</button>
+				<br>
+
+					
+		</center>
+<script type="text/javascript">
+ 
+$(function(){
+	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
+	$("#agregar").on('click', function(){
+		$("#tabla tbody tr:eq(0)").clone().removeClass('fila-base').appendTo("#tabla tbody");
+	});
+ 
+	// Evento que selecciona la fila y la elimina 
+	$(document).on("click",".eliminar",function(){
+		var parent = $(this).parents().get(1);
+		$(parent).remove();
+
+	});
+});
+ 
+</script>
+		
+{% endblock %}
+
+<script>
+
+function opiniones(){
+    //var value = sel.options[sel.selectedIndex].value;
+    alert("entro");
+}
+</script>
+

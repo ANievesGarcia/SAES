@@ -1,0 +1,60 @@
+{% extends "Alumno/baseAl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+	<div class="show-content">
+
+		<div class="page-header">
+			<h2>Tutor</h2>
+		</div>
+
+		{% if sintutor == 1%}
+
+		<div align="center">
+			<p class="text-info">Tutor no asignado.</p>
+		</div>
+
+		{% else %}
+
+		<div align="center">
+
+			<table cellpadding="10">
+				<tr>
+					<td align="right"><label><strong>Nombre:</strong></label></td>
+					<td><label id="al-nomtutor">{{ nomcomprof }}</label></td>
+				</tr>									
+				<!--<tr>
+					<td><label align="right"><strong>Departamento:</strong></label></td>
+					<td><label id="al-tutordepto"></label></td>
+				</tr>-->
+			</table>
+
+			<h4>Horario en la escuela:</h4>
+
+			<div style="width:300px;">
+			<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Hora de entrada</th>
+							<th>Hora de salida</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ dat.tutor_escolar.hora_entrada }}</td>
+							<td>{{ dat.tutor_escolar.hora_salida }}</td>
+							
+						</tr>						
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		{% endif %}
+
+	</div>
+
+{% endblock %}

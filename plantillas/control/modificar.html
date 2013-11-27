@@ -1,0 +1,405 @@
+{% extends "control/basectrl.html" %}
+{% block nom-usuario %}{{clave_empleado.nombre}} {{clave_empleado.apellidoPaterno}} {{clave_empleado.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{clave_empleado.clasificacion}}{% endblock %}
+{% block id-usuario %}{% endblock %}
+{% block archivos_css  %}
+	<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+{% endblock %}
+
+{%  block contenido %}
+
+			<div class = "show-content">
+
+				<h1 id = "titulo">Modificar Grupo</h1>
+
+				<br />
+
+				<div style = "overflow-y: scroll; height: 460px;">
+
+				<form method = "POST" action = "../c_modificar_grupo/"> {% csrf_token %}
+
+					<table class = "table table-bordered">
+						<tr>
+							<td>
+								Clave del grupo:&nbsp;&nbsp;&nbsp;
+								<input type = "text" name = "clave_grupo" title = "El formato de este campo es: [1-5][C][M/V][1-15]. Ejemplo: 3CV9" pattern = "[1-5][C][M|V][1]{0,1}[0-9]" value = "{{ grupo }}"/>
+							</td>
+
+							<td>
+								Salón:&nbsp;&nbsp;&nbsp;
+								<select name = "clave_salon">
+
+									{% for salon in salones %}
+
+										<option value = "{{ salon.cve_salon }}">{{ salon.cve_salon }}</option>
+										
+									{% endfor %}
+
+								</select>
+							</td>
+
+						</tr>
+
+						<tr colspan = "2">
+							<td>Materias</td>
+						</tr>
+
+							<tr>
+								<td>
+									Materia:&nbsp;&nbsp;&nbsp;
+									<select name = "materias1">
+										
+										<option value = "Sel" selected>Seleccione</option>
+										
+										{% for materia in materias %}
+											
+											{% if materia.cve_materia == materiasig.0.materia.cve_materia %}
+
+												<option value = "{{ materia.cve_materia }}" selected>{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% else %}
+
+												<option value = "{{ materia.cve_materia }}">{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+
+									</select>
+								</td>
+
+								<td>
+									Horario:&nbsp;&nbsp;&nbsp;
+									<select name = "horarios1">
+  
+										{% for horario in "xxxxxxxxxxxxxx" %}
+
+											{% if forloop.counter == materiasig.0.horario.cve_horario %}
+
+												<option value = "{{ forloop.counter }}" selected>{{ forloop.counter }}</option>
+
+											{% else %}
+
+												<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+									
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Materia:&nbsp;&nbsp;&nbsp;
+									<select name = "materias2">
+										
+										<option value = "Sel" selected>Seleccione</option>
+										
+										{% for materia in materias %}
+											
+											{% if materia.cve_materia == materiasig.1.materia.cve_materia %}
+
+												<option value = "{{ materia.cve_materia }}" selected>{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% else %}
+
+												<option value = "{{ materia.cve_materia }}">{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+
+									</select>
+								</td>
+
+								<td>
+									Horario:&nbsp;&nbsp;&nbsp;
+									<select name = "horarios2">
+  
+										{% for horario in "xxxxxxxxxxxxxx" %}
+
+											{% if forloop.counter == materiasig.1.horario.cve_horario %}
+
+												<option value = "{{ forloop.counter }}" selected>{{ forloop.counter }}</option>
+
+											{% else %}
+
+												<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+									
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Materia:&nbsp;&nbsp;&nbsp;
+									<select name = "materias3">
+										
+										<option value = "Sel" selected>Seleccione</option>
+										
+										{% for materia in materias %}
+											
+											{% if materia.cve_materia == materiasig.2.materia.cve_materia %}
+
+												<option value = "{{ materia.cve_materia }}" selected>{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% else %}
+
+												<option value = "{{ materia.cve_materia }}">{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+
+									</select>
+								</td>
+
+								<td>
+									Horario:&nbsp;&nbsp;&nbsp;
+									<select name = "horarios3">
+  
+										{% for horario in "xxxxxxxxxxxxxx" %}
+
+											{% if forloop.counter == materiasig.2.horario.cve_horario %}
+
+												<option value = "{{ forloop.counter }}" selected>{{ forloop.counter }}</option>
+
+											{% else %}
+
+												<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+									
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Materia:&nbsp;&nbsp;&nbsp;
+									<select name = "materias4">
+										
+										<option value = "Sel" selected>Seleccione</option>
+										
+										{% for materia in materias %}
+											
+											{% if materia.cve_materia == materiasig.3.materia.cve_materia %}
+
+												<option value = "{{ materia.cve_materia }}" selected>{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% else %}
+
+												<option value = "{{ materia.cve_materia }}">{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+
+									</select>
+								</td>
+
+								<td>
+									Horario:&nbsp;&nbsp;&nbsp;
+									<select name = "horarios4">
+  
+										{% for horario in "xxxxxxxxxxxxxx" %}
+
+											{% if forloop.counter == materiasig.3.horario.cve_horario %}
+
+												<option value = "{{ forloop.counter }}" selected>{{ forloop.counter }}</option>
+
+											{% else %}
+
+												<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+									
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Materia:&nbsp;&nbsp;&nbsp;
+									<select name = "materias5">
+										
+										<option value = "Sel" selected>Seleccione</option>
+										
+										{% for materia in materias %}
+											
+											{% if materia.cve_materia == materiasig.4.materia.cve_materia %}
+
+												<option value = "{{ materia.cve_materia }}" selected>{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% else %}
+
+												<option value = "{{ materia.cve_materia }}">{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+
+									</select>
+								</td>
+
+								<td>
+									Horario:&nbsp;&nbsp;&nbsp;
+									<select name = "horarios5">
+  
+										{% for horario in "xxxxxxxxxxxxxx" %}
+
+											{% if forloop.counter == materiasig.4.horario.cve_horario %}
+
+												<option value = "{{ forloop.counter }}" selected>{{ forloop.counter }}</option>
+
+											{% else %}
+
+												<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+									
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Materia:&nbsp;&nbsp;&nbsp;
+									<select name = "materias6">
+										
+										<option value = "Sel" selected>Seleccione</option>
+										
+										{% for materia in materias %}
+											
+											{% if materia.cve_materia == materiasig.5.materia.cve_materia %}
+
+												<option value = "{{ materia.cve_materia }}" selected>{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% else %}
+
+												<option value = "{{ materia.cve_materia }}">{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+
+									</select>
+								</td>
+
+								<td>
+									Horario:&nbsp;&nbsp;&nbsp;
+									<select name = "horarios6">
+  
+										{% for horario in "xxxxxxxxxxxxxx" %}
+
+											{% if forloop.counter == materiasig.5.horario.cve_horario %}
+
+												<option value = "{{ forloop.counter }}" selected>{{ forloop.counter }}</option>
+
+											{% else %}
+
+												<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+									
+									</select>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Materia:&nbsp;&nbsp;&nbsp;
+									<select name = "materias7">
+										
+										{% for materia in materias %}
+											
+											{% if materia.cve_materia == materiasig.6.materia.cve_materia %}
+
+												<option value = "{{ materia.cve_materia }}" selected>{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% else %}
+
+												<option value = "{{ materia.cve_materia }}">{{ materia.cve_materia }} {{ materia.nombre }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+
+									</select>
+								</td>
+
+								<td>
+									Horario:&nbsp;&nbsp;&nbsp;
+									<select name = "horarios7">
+  
+										{% for horario in "xxxxxxxxxxxxxx" %}
+
+											{% if forloop.counter == materiasig.6.horario.cve_horario %}
+
+												<option value = "{{ forloop.counter }}" selected>{{ forloop.counter }}</option>
+
+											{% else %}
+
+												<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+
+											{% endif %}
+
+										{% endfor %}
+									
+									</select>
+								</td>
+							</tr>
+
+						<tr colspan = "2">
+							<td><input class = "btn" type = "submit" value = "Aceptar" /></td>
+						</tr>
+
+					</table>
+
+				</form>
+
+				</div>
+
+			</div>
+
+			{% if mensaje_modificar == 1 %}
+				<script>
+					bootbox.alert( 'No se puede crear el grupo. Este grupo ya existe.' )
+				</script>
+			{% elif mensaje_modificar == 2 %}
+				<script>
+					bootbox.alert( 'No se puede impartir la misma materia dos veces en el mismo grupo.' )
+				</script>
+			{% elif mensaje_modificar == 3 %}
+				<script>
+					bootbox.alert( 'No se pueden impartir dos materias al mismo tiempo.' )
+				</script>
+			{% elif mensaje_modificar == 4 %}
+				<script>
+					bootbox.alert( 'Este salón ya tiene un grupo en este turno.' )
+				</script>
+			{% elif mensaje_modificar == 5 %}
+				<script>
+					bootbox.alert( 'Hay materias que no corresponden a este nivel.' )
+				</script>
+			{% elif mensaje_modificar == 6 %}
+				<script>
+					bootbox.alert( 'Los horarios no corresponden al turno. Turno matutino: 1 - 8, Turno Vespertino: 8 - 14' )
+				</script>
+			{% endif %}
+
+{% endblock %}

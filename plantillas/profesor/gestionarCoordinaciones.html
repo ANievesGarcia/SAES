@@ -1,0 +1,69 @@
+
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+
+	
+{% endblock %}
+
+{%  block contenido %}
+			
+				<h1>Gestión de coordinación</h1></br>
+					<h2>Departamento: {{es_jefe.cve_depto.nombre_depto}}</h2></br>
+
+				{% if mensaje == 1 %}
+					<script>
+					bootbox.alert('Coordinaciones guardadas correctamente')
+					
+					</script>
+
+				{% elif mensaje == 2 %}
+					<script>
+					bootbox.alert('Error')
+					</script>
+				{% endif %}
+
+				<center>
+			<Form method="GET" action='/jefe_depto_guarda_coordinacion'>
+				<P>Materias pertenecientes al departamento	
+				<table id='tabla-materias-profesor'>
+						<tr>
+							<th>Materia</th>
+							<th>Coordinador</th>
+
+						</tr>
+						{%for materia in materias %}
+							<tr>
+								<td>{{materia.nombre}}</td>
+								<td><select name={{materia.id}} >
+									<option value="sinAsignar" selected="selected"> 
+											Sin asignar
+									</option>
+
+										{%for profesor in profesores %}
+											{% if profesor.id == materia.coordinador.id %}
+												<option value={{profesor.id}} selected="selected"> 
+													{{ profesor.cve_usuario.get_full_name}} 
+												</option>
+											{% else %}
+												<option value={{profesor.id}}> 
+													{{ profesor.cve_usuario.get_full_name}} 
+												</option>
+											{% endif %}	
+										{% endfor %}
+									</select>
+								</td>
+							</tr>
+						{% endfor %}
+						
+					</table>
+				<br>
+			<input class="btn" type="submit" value="Guardar"/>
+
+			<input class="btn cancelar" type="button" value="Cancelar" onclick="bootbox.alert('Usted ha cancelado la operacion',function() {
+  window.location = '/profesor_main'});"/>
+			</Form>
+		</center>
+		
+{% endblock %}

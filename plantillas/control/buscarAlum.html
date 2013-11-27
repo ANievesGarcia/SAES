@@ -1,0 +1,132 @@
+
+{% extends "control/basectrl.html" %}
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+	
+{% endblock %}
+
+{%  block contenido %}
+
+<!-- area de trabajo -->
+
+
+
+	
+	
+	
+			
+			<div class="show-content">			
+
+			<h1 id='titulo' align=center>Buscar Alumno</h1>
+			<center>	
+							{% if notif2 == 1 %}
+				<script>
+					bootbox.alert("Información actualizada")
+					
+				</script>
+							{% elif notif == 2 %}
+				<script>
+					bootbox.alert("Se ha agregado la materia correctamente")
+					
+				</script>
+				
+							{% elif notif == 5 %}
+				<script>
+					bootbox.alert("No se ha encontrado ningún alumno")
+					
+				</script>
+				{% endif %}
+			<br>	
+			<form method="POST" action="../mostrarAlum/">	{% csrf_token %}	
+			<input  id ="alumno" name="alumno"  style='width:250px' required>
+
+			<input class="btn" type="submit" value="Buscar"  >
+			
+			</form>
+					
+		<table id='tabla-alumnos' class="table">
+
+				<tr>
+				
+			{% if notif == 15 %}
+			
+			<form method="POST" action="../modificarAlum/">	{% csrf_token %}	
+
+					<tr>
+					<th>Nombre</th>				
+					<td>{{usuarios.nombre}}</td>
+					
+					<th>Boleta</th>
+					<td><label id="clave" name="clave">{{usuarios.clave}}</label></td>
+					</tr>
+					<tr>
+					<th>Apellido paterno</th>
+					<td>{{usuarios.apellidoPaterno}}</td>
+
+					<th>Apellido materno</th>
+					<td>{{usuarios.apellidoMaterno}}</td>
+					</tr>
+					<tr>
+					<th>Sexo</th>
+					<td>{{usuarios.sexo}}</td>
+					
+					<th>Fecha de nacimiento</th>
+					<td>{{usuarios.fecha_nac}}</td>
+					</tr>					
+					<tr>
+					<th>CURP</th>
+					<td>{{usuarios.curp}}</td>
+
+					<th>E-MAIL</th>
+					<td>{{usuarios.email_personal}}</td>
+					<input  id ="clave" name="clave" value="{{usuarios.clave}}"  style='width:250px' hidden>
+					<input  id ="clave" name="key" value="no"  style='width:250px' hidden>
+					</tr>
+					<tr>
+					<th>Seguro médico</th>
+					<td>{{usuarios.seguroMedico}}</td>
+					
+					<th>Número de seguro social</th>
+					<td>{{usuarios.numero_ss}}</td>
+					</tr>
+					<tr>
+					<th>Tipo</th>
+					<td>{{alumnos.tipo}}</td>
+					
+					<th>Teléfono</th>
+					<td>{{usuarios.Telefono_Celular}}</td>
+					</tr>
+					
+					</tr>
+					<tr>
+				
+			<center><td class="modificar"><input class="modificar" type="submit" value="Modificar" name='modifica_alumno'></td>
+					</form>
+					<form method="POST" action="../reporteAlum/">{% csrf_token %}
+					<input  id ="clave1" name="clave1" value="{{usuarios.clave}}"  style='width:250px' hidden>
+					<td><input type="submit" value="Generar reporte" name='reporteAlum'></td>
+					</form>
+					<form method="POST" action="../darBajaMat/">{% csrf_token %}
+					<input  id ="clave2" name="clave2" value="{{usuarios.clave}}"  style='width:250px' hidden>
+					{% if notifica == 1 %}
+					<td><input type="submit" value="Modificar Horario" name='darBajaMat'></td>
+					{% endif %}
+					</form>
+					</tr>
+					{% endif %}
+
+	
+		</table>
+					
+				
+				
+						
+			</div>	
+
+{% endblock %}
+
+	
+			

@@ -1,0 +1,15 @@
+{% extends "Alumno/baseAl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+
+	<div class="show-frame">
+		<iframe name="frameevaprof" src="../evaluarprofsframe1" width="100%" height="100%" frameborder=0></iframe>
+	</div>
+
+{% endblock%}
+
+				

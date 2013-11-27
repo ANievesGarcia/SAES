@@ -1,0 +1,102 @@
+{% extends "Alumno/baseAl.html" %}
+ <meta equiv="Pragma" content="no-cache"/>
+ < meta http-equiv="Expires" content="-1" />
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}}{% endblock %}
+{% block tipo-usuario %}Alumno{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+{% block contenido%}
+	<script>
+		var metodoinc;
+		var grupo;
+		function getMateria(valor){
+			var materias;
+			bootbox.setDefaults({locale:"es"});
+			//document.getElementById
+			$.ajax({ url:"/alumno/getMateria", type:"GET", data:({nivel: valor, metod: metodoinc}),}).done(function(data){ document.getElementById("texto").innerHTML=data; });
+		}
+		function metodo(valor){
+			metodoinc=valor;
+			document.getElementById("nivel").disabled=false;
+			//document.getElementById("nivel").removeAttribute("disabled");
+		}
+		function getInfo(valor){
+			if(metodoinc==2){
+				document.getElementById("todo").style.display="block";
+				document.getElementById("inscripcion").style.display="block";
+				grupo=valor;
+			}
+			else{
+				document.getElementById("inscripcion").style.display="block";
+				document.getElementById("todo").style.display="none";
+			}
+			$.ajax({ url:"/alumno/getResult", type:"GET", data:({clave: valor, metod: metodoinc}),}).done(function(data){ document.getElementById("resultados").innerHTML=data; });
+		}
+		function anadir(valor1,valor2)
+		{
+			document.getElementById("eliminador").style.display="inline";
+			document.getElementById("cancela").style.display="inline";
+			document.getElementById("guarda").style.display="block";
+			var a="{{bol}}";
+			$.ajax({ url:"/alumno/insertData", type:"GET", data:({bol: a, grupo: valor1, materia:valor2}),}).done(function(data){  bootbox.alert(data,function() {}); });	
+		}
+		function eliminar(valor1,valor2){
+			var a="{{bol}}";
+			$.ajax({ url:"/alumno/delData", type:"GET", data:({bol: a, grupo: valor1, materia:valor2}),}).done(function(data){ bootbox.alert('Materia eliminada correctamente',function() {}); });
+		}
+		function eliminatodo(){
+			var a="{{bol}}";
+			$.ajax({ url:"/alumno/delallData", type:"GET", data:({bol: a}),}).done(function(data){ document.getElementById("actual").innerHTML=data; });
+		}
+		function updateAct(){
+			var a="{{bol}}";
+			setTimeout(function(){/*YourCode*/},1000);
+			$.ajax({ url:"/alumno/updateAct", type:"GET", data:({bol: a}),}).done(function(data){ document.getElementById("actual").innerHTML=data; });	
+		}
+		function inscribetodo(){
+			var a="{{bol}}";
+			document.getElementById("eliminador").style.display="inline";
+			document.getElementById("cancela").style.display="inline";
+			document.getElementById("guarda").style.display="block";
+			$.ajax({ url:"/alumno/addAll", type:"GET", data:({bol: a, grup: grupo}),}).done(function(data){ bootbox.alert(data,function() {}); });	
+		}
+		function final(){
+			var a="{{bol}}";
+			$.ajax({ url:"/alumno/final", type:"GET", data:({bol: a}),}).done(function(data){ if(data=='OK'){ bootbox.alert("Has finalizado correctamente tu inscripción",function() {   window.location = '../alumnoInicio' }); } else { bootbox.alert(data,function() {}); }});	
+		}
+	</script>
+	<input style="position: fixed; top: 0px; right: 0px" type="button" onClick="bootbox.alert('Usa las opciones para encontrar la materia que deseas agregar, despues presiona el boton Agregar para añadirla a tu horario',function() {})" value="Ayuda"/>
+	<div class="hero-unit" style="background-color: #ffffff">
+	<div style="margin-left:-60px">
+		<h1>Inscripción</h1>
+			<br/>
+				<select id="metodo" name="metodo"   style="width:200px" onchange="metodo(this.value)">
+						<option value=1> Inscribir por materia </option>
+						<option value=2> Inscribir por grupo </option>
+				</select>
+				<select id="nivel" name="nivel" onchange="getMateria(this.value)" disabled style="width:200px">
+					<option value=0>Selecciona un nivel</option>
+					<option value=1>Nivel 1</option>
+					<option value=2>Nivel 2</option>
+					<option value=3>Nivel 3</option>
+					<option value=4>Nivel 4</option>
+				</select>
+				<div id="texto" style="display:inline">
+					<select disabled></select>
+				</div>
+				<div id="inscripcion" style="display:none">
+					<label id="res">Resultados de búsqueda</label>
+					<div id="resultados" style="height:150px; overflow-y:auto; overflow-x:hidden; width:785px; border:2px solid; border-radius:10px"></div>
+					<input type="button" style="display:none" class="btn" id="todo" hidden="hidden" onClick="inscribetodo();updateAct()" value="Inscribir grupo completo" />
+					<br/>
+					<label id="res">Horario actual</label>
+					<div id="actual" style="height:250px; overflow-y:auto; overflow-x:hidden; width:785px; border:2px solid; border-radius:10px"></div>
+					<input type="button" style="display:none" class="btn" id="eliminador" hidden="hidden" onClick="eliminatodo();bootbox.alert('Has eliminado todas las materias de tu horario',function() {})" value="Eliminar todo" />
+					<input type="button" style="display:none" class="btn" id="cancela" hidden="hidden" onClick="bootbox.confirm('¿Desea cancelar su inscripción?',function(result) { 
+					if(result==true){ window.location = '../alumnoInicio'; eliminatodo();}else {}})" value="Cancelar inscripción"/>
+  					<input type="button" style="display:none" class="btn" id="guarda" hidden="hidden" onClick="bootbox.confirm('¿Desea finalizar su inscripción?',function(result) { 
+					if(result==true){ final();}else {}})" value="Finalizar inscripción"/>
+					</div>
+				</div>
+	</div>
+
+{% endblock %}

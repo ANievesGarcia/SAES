@@ -1,0 +1,141 @@
+{% extends "control/basectrl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+	
+	<div class="page-header">
+					<h2 align=center>Registro de materias</h2>
+				</div>
+
+				{% if notif == 1 %}
+				<script>
+					bootbox.alert("Registro exitoso", function(){window.location='../abreMateria'})
+				</script>
+				{% endif %}
+
+				{% if notif == 2 %}
+				<script>
+					bootbox.alert("Ya existe una materia con la misma clave.", function(){window.location='../abreMateria'})
+				</script>
+				{% endif %}				
+				
+				<div class="show-content">
+						<div class="tab-content" align=center>
+							
+														
+							<div class="tab-pane active" id="regMat">
+								<form action="../regMateria/" method="POST">{% csrf_token %}
+								<table cellpadding="6">
+									<tr>
+										<td><label align="rigth"><strong>*Clave materia:</strong></label></td>
+							<!--	Para modificar datos <td><input type="text" value="{{bol.cve_materia}}" name="cve_materia" ></td> -->
+										<td><input type="text" value="" name="cve_materia" pattern="C[0-9]{3}$"  required></td>
+										<td><label align="right"><strong>*Nombre materia:</strong></label></td>
+										<td><input type="text" value="" name="nombre_materia" pattern="^[a-zA-Z\s]*$"  required></td>
+									</tr>
+
+									<tr>
+										<td><label align="right"><strong>Creditos:</strong></label></td>
+										<td><input type="text"  name="credito_materia" ></td>
+										<td><label align="right"><strong>Plan de estudios:</strong></label></td>
+										<td>
+										<select name="plan_materia">
+										<option>2009</option>
+										<option>2010</option>
+										</select>
+										</td>
+										<!--<td><input type="text" value="" name="plan_materia" ></td>-->
+									</tr>
+
+									<tr>
+										<td><label align="right"><strong>Clasificacion:</strong></label></td>
+										<td>
+										<select name="clasif_materia">
+										<option>Institucional</option>
+										<option>Cientifica_basica</option>
+										<option>Profesional</option>
+										<option>Terminal_integracion</option>
+										</select>							
+										</td>										
+										
+										<!--<td><input type="text" value="" name="clasif_materia" ></td>-->
+										<td><label align="right"><strong>Tipo:</strong></label></td>
+										<td>
+										<select name="tipo_materia">
+										<option>Obligatoria</option>
+										<option>Optativa</option>
+										</select>
+										</td>
+										<!--<td><input type="text" value="" name="tipo_materia" ></td>-->
+									
+									
+									</tr>		
+
+									<tr>
+										<td><label align="right"><strong>Nivel:</strong></label></td>
+										<td>
+										<select name="nivel_materia">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>									
+										</select>
+										</td>
+										<!--<td><input type="text" value="" name="nivel_materia" ></td>-->
+										<td><label align="right"><strong>Departamento:</strong></label></td>
+										<td><select name="dep_materia">
+										{%for dep in deptos %}
+										<option > {{dep.nombre_depto}}  </option>
+										{% endfor %}
+										</select></td>										
+										
+										
+										<!--<td><input type="text" value="" name="dep_materia" pattern="^[a-zA-Z\s]*$" title="Ingresa un departamento valido" requiered></td>-->
+									</tr>		
+
+									<tr>
+										<td><label align="right"><strong>Materia antecedente:</strong></label></td>
+										<td><select name="matA_materia">
+										<option selected></option>
+										{%for materia in materias %}
+										<option > {{materia.cve_materia}} {{materia.nombre}}  </option>
+										{% endfor %}
+										</select></td>	
+										
+										<!--<td><input type="text" value="" name="matA_materia" pattern="^[a-zA-Z\s]*$"></td>-->
+										<td><label align="right"><strong>Materia siguiente:</strong></label></td>
+										<td><select name="matS_materia">
+										<option selected></option>
+										{%for materia in materias %}
+										<option > {{materia.cve_materia}} {{materia.nombre}}  </option>
+										{% endfor %}
+										</select></td>	
+										<!--<td><input type="text" value="" name="matS_materia" pattern="^[a-zA-Z\s]*$"></td>-->
+									</tr>									
+															</table>
+								<input type="submit" class="btn btn-default" value="Guardar" name="fin_datgen" align=center>
+								</form>
+							</div>
+
+								
+
+							
+							
+							
+							
+							
+
+
+
+
+						</div>
+					</div>
+				</div>
+
+{% endblock %}
+
+				

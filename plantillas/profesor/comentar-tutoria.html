@@ -1,0 +1,49 @@
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+	<link rel="stylesheet" href="{{MEDIA_URL}}css/profesor/tutoria.css">
+{% endblock %}
+
+{% block archivos_js  %}
+{% endblock %}
+
+
+{%  block contenido %}
+			
+			<h1 id="titulo">Comentar sobre alumnos tutorados</h1><br>
+			{% if mensaje == 1 %}
+					<script>
+					bootbox.alert('Se han guardado correctamente los comentarios')
+					
+					</script>
+
+				{% elif mensaje == 2 %}
+					<script>
+					bootbox.alert('Hubo en error en la conexion con la base')
+					</script>
+				{% endif %}
+			<table id="tabla-tutorias">
+			<tr>
+				<th>Número de Boleta</th>
+				<th>Nombre del Alumno</th>
+				<th>Comentario</th>
+				<th></th>
+			</tr>
+			<form method="GET" action="/guardar_comentarios">
+			{%for alumno in Tutorado %}
+
+			<tr>
+				<td>{{alumno.alumno.cve_usuario}}</td>
+				<td class='nombre-alumno'>{{alumno.alumno.cve_usuario.nombre}} {{alumno.alumno.cve_usuario.apellidoPaterno}} {{alumno.alumno.cve_usuario.apellidoMaterno}}</td>
+				<td class="exito"><textarea id={{alumno.alumno_id}} rows="4" cols="50" name={{alumno.alumno_id}}>{{alumno.comentario}}</textarea></td>
+				<td>--</td>
+				</tr>
+			{% endfor %}
+			</table>
+			<div id='botones' class='center'>
+			<br>
+				<input class="btn" type="submit" value="Guardar Comentarios">
+			</form>
+			</div>
+
+{% endblock %}

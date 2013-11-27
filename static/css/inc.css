@@ -1,0 +1,27 @@
+﻿#hor-minimalist-a
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 10px;
+	background: #fff;
+	margin: 3px;
+	width: 600px;
+	border-collapse: collapse;
+	text-align: center;
+}
+#hor-minimalist-a th
+{
+	font-size: 12px;
+	font-weight: normal;
+	color: #039;
+	padding: 2px 1px;
+	border-bottom: 2px solid #6678b1;
+}
+#hor-minimalist-a td
+{
+	color: #669;
+	padding: 2px 1px 0px 1px;
+}
+#hor-minimalist-a tbody tr:hover td
+{
+	color: #009;
+}

@@ -1,0 +1,63 @@
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+
+	
+{% endblock %}
+
+{%  block contenido %}
+			
+				<h1>Agregar equipo de Laboratorio</h1></br>
+
+				{% if mensaje == 1 %}
+					<script>
+					bootbox.alert('Observaciones guardadas correctamente')
+					
+					</script>
+
+				{% elif mensaje == 2 %}
+					<script>
+					
+					</script>
+				{% endif %}
+<center>
+				<Form method="GET" action='/profesor_equipo2'>
+				<table id='tabla-materias-profesor' class='table table-hover' width=200>
+						<tr>
+							<th width=100>Nombre</th>
+								<td width=100><select name="nombre" >
+									<option value="Computadora">Computadora</option>
+									<option value="Impresora" >Impresora</option>
+
+									<option value="Multimetro">Multimetro</option>
+									<option value="Osciloscopio" >Osciloscopio</option>
+									<option value="FuenteAlimentacion" >Fuente de alimentacion</option>
+								</select></td>
+						</tr>
+							<tr>
+							<th width=100>Número de serie</th>
+								<td width=100><input name="serie" type="number" required></td>
+						</tr>
+							<tr>
+							<th width=100>Descripcion Equipo</th>
+								<td width=100><input name="desc"  type="text" required ></td>
+						</tr>
+							<tr>
+							<th width=100>status</th>
+								<td width=100><select id="materia" name="status" >
+									<option value="Activo">Activo</option>
+									<option value="Reparacion" >Reparacón</option>
+								</select>
+								</td>
+						</tr>
+							<tr>
+							<th width=100>Observaciones</th>
+								<td width=100><input name="obs" id="" type="text"></td>
+							
+						</tr>
+					</table>
+	</center>
+					<input class="btn" type="submit" value="Guardar"/>
+			</form>
+{% endblock %}

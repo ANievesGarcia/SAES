@@ -1,0 +1,68 @@
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+
+	<style>
+	.success {
+		background-color:
+	 #090;
+	}
+	.error {
+		background-color:#900;
+	}
+	</style>
+  
+{% endblock %}
+
+{% block archivos_js  %}
+
+	
+{% endblock %}
+
+{%  block contenido %}
+
+
+				<h1>Calificaciones de grupo ETS</h1></br>
+					<h3>Ingrese Calificaciones.</h3></br>
+				<center>
+				<h4>Materia: {{ets.cve_materia.nombre}}/ Turno:{{ets.get_turno_display}}</h4>
+		<form method="get" action="/profesor_guarda_calificacionETS">
+			<table class="table">
+				<tr>
+					<td>Nombre del Alumno</td>
+					<td>Calificación</td>
+				</tr>
+				<tr>
+
+
+				{% if mensaje == 1 %}
+					<script>
+					bootbox.alert('Calificaciones guardadas correctamente')
+					
+					</script>
+
+				{% elif mensaje == 2 %}
+					<script>
+					bootbox.alert('Se produjo un error en la conexion con la base')
+					</script>
+				{% endif %}
+
+
+				{% for alumno in alumnos %}
+					<tr>
+					<td>{{alumno.alumno.cve_usuario.nombre}} {{alumno.alumno.cve_usuario.apellidoPaterno}} {{alumno.alumno.cve_usuario.apellidoMaterno}}</td>
+					<td><input type="number"  min="0" max="10" name={{alumno.alumno.id}} id={{alumno.alumno.id}} value={{alumno.calificacion}}></td>
+				</tr>
+				{% endfor %}
+			</table>
+
+			<input class="btn" type="submit" value="Guardar"/>
+
+			<input class="btn cancelar" type="button" value="Cancelar" onclick="bootbox.alert('Usted ha cancelado la operacion',function() {
+  window.location = '/profesor_main'});"/>
+
+		</form>
+			</center>
+		
+{% endblock %}
+

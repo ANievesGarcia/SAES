@@ -1,0 +1,64 @@
+	<!DOCTYPE HTML>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="{{MEDIA_URL}}js/script.js"></script>
+		<link rel="stylesheet" href="{{MEDIA_URL}}css/style.css">
+
+		<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.min.css">
+		
+		<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.js"></script>
+		<script type="text/javascript" src="{{MEDIA_URL}}js/bootstrap.js"></script>
+		<script type="text/javascript" src="{{MEDIA_URL}}js/bootstrap.min.js"></script>
+		<!--<script type="text/javascript">
+		 	$(".dropdown-toggle").dropdown-toggle
+		</script>-->
+		
+
+		<title>SAESCOM</title>
+	</head>
+	<body>
+
+				<div class="contenedor-iframe">
+					<!--AREA DE TRABAJO-->
+					<div class="page-header">
+						<h2>Calificaciones</h2>
+					</div>
+
+					<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Grupo</th>
+							<th>Materia</th>
+							<th>Profesor</th>
+							<th>Calif. final</th>
+							<th>Extraordinario</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for alumno in Califs %}
+						<tr>
+							<td>{{ alumno.materia_grupo.grupo }}</td>
+							<td>{{ alumno.materia_grupo.materia.nombre }}</td>
+							<td>{{ alumno.materia_grupo.profesor.cve_usuario.apellidoPaterno}} 
+							    {{alumno.materia_grupo.profesor.cve_usuario.apellidoMaterno}}
+							    {{alumno.materia_grupo.profesor.cve_usuario.nombre}}</td>
+							{% if  alumno.calificacion != None %}
+							<td>{{ alumno.calificacion }}</td>
+							{% else %}
+							<td></td>
+							{% endif %}
+
+							{% if alumno.calificacionExtra != None %}
+							<td>{{ alumno.calificacionExtra }}</td>
+							{% else %}
+							<td></td>
+							{% endif %}
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+	</body>
+	</html>

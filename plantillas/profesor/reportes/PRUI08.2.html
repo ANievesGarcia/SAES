@@ -1,0 +1,43 @@
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+
+	
+{% endblock %}
+
+{% block archivos_js  %}
+	
+{% endblock %}
+
+
+{%  block contenido %}
+
+<div id="reportes">
+	<h1>Reportes</h1></br>
+					<h2><p style="margin-bottom:5%">Reporte de evaluaciones de alumnos</p></h2></br>
+				
+					<center>
+					<Form method="GET" action='/reporte_evaluaciones'>
+					Elija el grupo:
+						<select id="materia" name="materia">
+							{%for grupo in grupolist %}
+								<option value={{grupo.id}}> {{grupo.materia.nombre}} {{grupo.grupo.cve_grupo}} 
+								</option>
+							{% endfor %}
+						</select>
+
+					<input type="submit" value="Aceptar"/>
+					<br>
+
+			</Form>
+		</center>
+		<button class="btn" style="float: left; margin-left: 60px;" onclick="location.href='/profesor_main'">		Regresar
+		</button>
+
+
+</div>
+
+
+{% endblock %}
+
+			

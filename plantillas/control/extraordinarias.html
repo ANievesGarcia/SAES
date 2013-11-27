@@ -1,0 +1,120 @@
+
+{% extends "control/basectrl.html" %}
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+
+{% endblock %}
+
+{%  block contenido %}
+
+<!-- area de trabajo -->
+<link type="text/css" href="../demoengine/demoengine.css" rel="stylesheet">
+	<script type="text/javascript" src="../demoengine/demoengine.js" async defer></script>
+	<title>jQuery UI Datepicker: Using Datepicker to Select Date Range</title>
+	<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/themes/ui-darkness/jquery-ui.css" rel="stylesheet">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+	<style type="text/css">
+		.dp-highlight .ui-state-default {
+			background: #484;
+			color: #FFF;
+		}
+	</style>
+	
+	
+	
+			
+			<div class="show-content">			
+			<center>
+			<h1 id='titulo'>Modificar Fechas de evaluaciones extraordinarias</h1>
+			</center>
+			<br>
+			<br>
+			<form method="POST" action="../guardar_extraordinarias/">	{% csrf_token %}	
+			<center>
+			<div id="datepicker"></div>
+			<p>
+				<br>
+				<br>
+				Fechas:
+				<input type="text" id="input1" name="inic" size="10" readonly>
+				<input type="text" id="input2" name="fin" size="10" readonly>
+			</p>
+			<script>
+			  $(function() {
+				  
+				  $("#datepicker").datepicker({		
+					  minDate: "D",		
+					
+						beforeShowDay: function(date) {		
+							var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input1").val());
+							var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input2").val());
+							return [true, date1 && ((date.getTime() == date1.getTime()) || (date2 && date >= date1 && date <= date2)) ? "dp-highlight" : ""];
+							minDate: "D"
+						},
+						onSelect: function(dateText, inst) {
+							var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input1").val());
+							var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $("#input2").val());
+							if (!date1 || date2) {
+								$("#input1").val(dateText);
+								$("#input2").val("");
+								$(this).datepicker("option", "minDate", dateText);
+								dateFormat: "dd-mm-yy"
+							} else {
+								minDate: "D"
+								$("#input2").val(dateText);
+								$(this).datepicker("option", "minDate", "D");
+																
+							}
+						},
+							monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+			  'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+			  monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+			  'Jul','Ago','Sep','Oct','Nov','Dic'],		
+			  monthStatus: 'Ver otro mes', yearStatus: 'Ver otro año',
+			  dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+			  dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb'],
+			  dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa']	,
+			  minDate: "D"			
+					});
+			 
+			
+				});	
+			</script>
+			
+			
+			<br>			
+			<input class="btn" type="submit" value="Aceptar" onclick="">
+			</center>
+			</form>
+								
+					
+			
+			{% if notif == 3 %}
+				<script>
+				bootbox.alert("Por favor selecciona una fecha")			
+					
+				</script>
+						
+			{% elif notif == 2 %}
+				<script>
+						bootbox.alert("El elemento no existe")
+				</script>
+			{% elif notif == 1 %}
+				<script>
+						bootbox.alert("Fecha modificada correctamente")
+				</script>
+			{% elif notif == 7 %}
+				<script>
+						bootbox.alert("La fecha debe de ser después de evaluaciones ordinarias y antes del fin de periodo escolar")
+				</script>
+			{% endif %}								
+			</div>	
+
+{% endblock %}
+
+	
+			

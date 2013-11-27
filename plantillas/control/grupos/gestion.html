@@ -1,0 +1,54 @@
+{% extends "control/basectrl.html" %}
+{% block nom-usuario %}{{clave_empleado.nombre}} {{clave_empleado.apellidoPaterno}} {{clave_empleado.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{clave_empleado.clasificacion}}{% endblock %}
+{% block id-usuario %}{% endblock %}
+{% block archivos_css  %}
+	<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+{% endblock %}
+
+{%  block contenido %}
+
+			<div class = "show-content">
+
+				<h1 id = "titulo">Gestión de Grupos</h1>
+
+				<br />
+
+				<div style = "overflow-y: scroll; height: 460px;">
+
+				<table class = "table table-bordered">
+					<tr>
+						<th>Grupo</th>
+						<th>Salón</th>
+						<th>Opciones</th>
+					</tr>
+
+				{% for grupo in lista_grupos %}
+
+					<tr>
+						<td>{{ grupo.cve_grupo }}</td>
+						<td>{{ grupo.cve_salon }}</td>
+						<td>
+							
+							<input class = "btn" type = "submit" value = "Consultar" onclick = "location.href = '../consultar_grupo{{grupo.cve_grupo}}/'"/>
+
+							<input class = "btn" type = "submit" value = "Modificar" onclick = "location.href = '../modificar_grupo{{grupo.cve_grupo}}/'"/>
+
+							<input class = "btn" type = "submit" value = "Cerrar" onclick = "location.href = '../cerrar_grupo{{grupo.cve_grupo}}/'"/>
+
+						</td>
+					</tr>
+
+				{% endfor %}
+
+				</table>
+
+				<center>
+					<input class = "btn" type = "submit" value = "Abrir Grupo" onclick = "location.href = '../abrir_grupo/'"/>
+				</center>
+
+				</div>
+
+			</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+
+	
+{% endblock %}
+
+{%  block contenido %}
+			
+				<h1>Calificaciones saberes previos</h1></br>
+					<h2></h2></br>
+
+				
+				<center>
+			<Form method="GET" action='/profesor_ingresa_calificacion_saberes'>
+				<P>Elija la materia
+				<select id="materia" name="materia" >
+					{%for materia in materias %}
+						<option value={{materia.id}}> {{ materia.nombre}} </option>
+					{% endfor %}
+				</select>
+
+				
+					<input type="submit" value="Seleccionar"/>
+
+			</Form>
+		</center>
+		
+{% endblock %}

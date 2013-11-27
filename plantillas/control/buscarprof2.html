@@ -1,0 +1,75 @@
+
+{% extends "control/basectrl.html" %}
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+{% block archivos_css  %}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+	
+{% endblock %}
+
+{%  block contenido %}
+
+<!-- area de trabajo -->
+
+	
+	
+	
+			
+			<div class="show-content">			
+			{% if raul == 1 %}
+				<script>
+					bootbox.alert("Se ha modificado la información del profesor correctamente")
+				</script>
+			{% endif %}
+			<h1 id='titulo'>Buscar Profesor</h1>
+			<center>	
+			<br>	
+			<form method="POST" action="../mostrarprofesores/">	{% csrf_token %}	
+			<input list='profes' id ="prof" name="prof" style='width:250px'>
+			<datalist id='profes'>
+			{%for prof in profesoresList %}
+				<option>{{prof.cve_usuario.nombre}} {{prof.cve_usuario.apellidoPaterno}} {{prof.cve_usuario.apellidoMaterno}}</option>
+			{% endfor %}
+			</datalist>
+			<input class="btn" type="submit" value="Buscar" onclick="">
+			</form>
+					
+			<table id='tabla-profesores' class="table">
+				<tr>
+					<th>Clave</th>
+					<th>Nombre</th>
+					<th>Departamento</th>
+					<th></th>
+					<th></th>
+				</tr>
+				
+				<tr>			
+					<td>{{profesors.cve_usuario.clave}}</td>
+					<td>{{profesors.cve_usuario.nombre}} {{profesors.cve_usuario.apellidoPaterno}} {{profesors.cve_usuario.apellidoMaterno}}</td>
+					<td>{{profesors.carrera}}</td>
+					<td class="modificar"><input class="modificar" type="submit" value="Modificar" onclick="location.href='../modificarprofesor{{profesors.cve_usuario.clave}}/'"/></td>
+					<td class="Reporte"><input class="reporte" type="submit" value="Reporte" onclick="location.href='../reporteprofesor{{profesor.cve_usuario.clave}}/'"/></td>
+					<td class="eliminar"><input class="eliminar" type="submit" value="Eliminar" onclick="location.href='../eliminarprofesor{{profesors.cve_usuario.clave}}/'"/></td>
+				</tr>
+				</table>
+					
+			
+			{% if notif == 3 %}
+				<script>
+				bootbox.alert("Por favor ingresa un elemento a buscar")			
+					
+				</script>
+			
+			{% elif notif == 2 %}
+				<script>
+						bootbox.alert("El elemento no existe")
+				</script>
+			
+			{% endif %}								
+			</div>	
+
+{% endblock %}
+
+	
+			

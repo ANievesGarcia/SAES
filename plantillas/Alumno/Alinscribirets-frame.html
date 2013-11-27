@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="{{MEDIA_URL}}js/script.js"></script>
+	<link rel="stylesheet" href="{{MEDIA_URL}}css/style.css">
+
+	<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.min.css">
+	
+	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}js/bootstrap.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}js/bootstrap.min.js"></script>
+	<!--<script type="text/javascript">
+	 	$(".dropdown-toggle").dropdown-toggle
+	</script>-->
+	
+
+	<title>SAESCOM</title>
+</head>
+<body>
+	<div class="contenedor-iframe">
+
+
+		<div class="page-header">
+			<h2>Inscripción a ETS</h2>
+		</div>
+	<form action="../reporteETS/" method="POST">{% csrf_token %}	
+
+		{% if hayreprobadas == 0 %}
+
+		<div align="center">
+			<p class="text-info">No tienes materias reprobadas</p>
+		</div>
+		
+
+		{% else%}
+		<h4>Materias a presentar:</h4>
+
+		<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Clave</th>
+						<th>Materia</th>
+						<th>Día de examen</th>
+						<th>Horario de examen</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for alumno in matrep %}
+					<tr>
+						<td>{{ alumno.ets.cve_materia.cve_materia }}</td>
+						<td>{{ alumno.ets.cve_materia.nombre }}</td>
+						<td>{{ alumno.ets.fecha }}</td>
+						<td>{{ alumno.ets.hora }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+		</table>
+		<div class="alin-der">
+			<input class="btn" type="submit" name="reporteETS" value="Comprobante"/>
+		</div>
+
+		{% endif %}
+	</div>
+	</form>
+	
+</body>
+</html>

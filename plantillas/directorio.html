@@ -1,0 +1,76 @@
+
+{% extends 'profesor/base.html' %}
+
+{% block archivos_css  %}
+	
+{% endblock %}
+
+{% block archivos_js  %}
+	
+{% endblock %}
+
+
+{%  block contenido %}
+
+<!-- area de trabajo -->
+			<h1 id='titulo'>Directorio</h1>
+			<center>
+			<br>
+				{% if mensaje == 1 %}
+					<script>
+					bootbox.alert('No se encontro el recurso')
+					
+					</script>
+
+				{% elif mensaje == 2 %}
+					<script>
+					bootbox.alert('Hubo en error en la conexion con la base')
+					</script>
+				{% endif %}
+			<form method="GET" action="/perfiles_profesor">
+			<h2>Buscar Profesores</h2>
+			
+			<input list='profes' id ="prof" name="prof" style='width:250px'>
+			<datalist id='profes'>
+			{%for prof in profesoresList %}
+				<option>{{prof}}</option>
+			{% endfor %}
+			</datalist>
+			<input class="btn" type="submit" value="Buscar"/>
+			</form>
+			
+			<br>
+			<br>
+			<br>
+			<form method="GET" action="/perfiles_materia">
+			<h2>Buscar Materias</h2>
+			
+			<input list='materias' id="mat" name="mat" style='width:250px'>
+			<datalist id='materias'>
+			{%for materia in materiasList %}
+				<option>{{materia.nombre}}</option>
+			{% endfor %}
+			</datalist>
+			<input class="btn" type="submit" value="Buscar"/>
+			</form>
+			
+			<br>
+			<br>
+			<br>
+			<form method="GET" action="/perfiles_grupo">
+			<h2>Buscar Grupos</h2>
+			
+			<input list='grupos' id ="group" name="grup" style='width:250px'>
+			<datalist id='grupos'>
+			{%for grupo in gruposList %}
+				<option>{{grupo}}</option>
+			{% endfor %}
+			</datalist>
+			<input class="btn" type="submit" value="Buscar"/>
+			</form>
+			</center>
+
+{% endblock %}
+
+	
+			

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/bootstrap.min.css">
+
+	<script src="{{MEDIA_URL}}js/jquery.js"></script>
+	<script src="{{MEDIA_URL}}js/script.js"></script>
+	<script src="{{MEDIA_URL}}js/bootstrap.js"></script>
+	<script src="{{MEDIA_URL}}js/bootstrap-dropdown.js"></script>
+
+	<script src="{{MEDIA_URL}}js/bootbox.min.js"></script>
+	<script src="{{MEDIA_URL}}js/horario.js"></script>
+	<script src="{{MEDIA_URL}}js/formularios.js"></script>
+
+	<link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.css">
+	<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+	<link rel="stylesheet" href="{{STATIC_URL}}css/inc.css">
+	
+	<title>SAESCOM</title>
+</head>
+<body>
+
+	<div class="contenedor-iframe">
+		
+		{% if msj == 1 %}
+			<script>
+				bootbox.alert("Contraseña incorrecta")
+			</script>
+		
+		{% elif msj == 2 %}
+			<script>
+				if({{restantesCons}}==1)
+				{
+					bootbox.alert("Solicitud enviada, recoger documento en 2 días hábiles, te resta {{restantesCons}} constancia oficial")
+				}
+				else
+				{
+					bootbox.alert("Solicitud enviada, recoger documento en 2 días hábiles, te restan {{restantesCons}} constancias oficiales")
+				}
+			</script>
+			
+		{% elif msj == 3 %}
+			<script>
+				if({{restantesBol}}==1)
+				{
+					bootbox.alert("Solicitud enviada, recoger documento en 2 días hábiles, te resta {{restantesBol}} boleta oficial")
+				}
+				else
+				{
+					bootbox.alert("Solicitud enviada, recoger documento en 2 días hábiles, te restan {{restantesBol}} boletas oficiales")
+				}
+			</script>
+			
+		{% elif msj == 4 %}
+			<script>
+				bootbox.alert("No puedes tramitar más boletas oficiales")
+			</script>
+			
+		{% elif msj == 5 %}
+			<script>
+				bootbox.alert("No puedes tramitar más constancias oficiales")
+			</script>
+		{% endif %}
+	
+		<script type="text/javascript">
+		var valor;
+		function ttipo(valor){
+		if(valor=='of'){
+			document.getElementById("oficial").style.display="block";
+		}
+		
+		else{
+			document.getElementById("oficial").style.display="none";
+		}
+		}
+		</script>
+
+		<div class="show-content">
+
+			<div class="page-header">
+				<h2>Solicitar documentos</h2>
+			</div>
+
+			<center>
+			<form action="/alumno/reporteConstancia/" method="GET">{% csrf_token %}
+				<label><strong>Documento:</strong></label>
+				<select id="doc" name="tipo" style="width:auto;" onChange="cat(this.value)">
+					<option value="bol">Boleta global</option>
+					<option value="const">Constancia de estudios</option>
+				</select>
+				<br>
+				<br>
+				
+				<label><strong>Categoría:</strong></label>
+				<select id="nivel" name="categoria" style="width:auto;" onChange="ttipo(this.value)">
+					<option value="no">No oficial</option>
+					<option value="of">Oficial</option>
+				</select>
+				<center>
+				<div class="control-group" id="oficial" style="display:none">
+					<label class="control-label" for="contraseña"><strong>Contraseña:<strong></label>
+					<div class="controls">
+					<input type="password" id="contraseña" name="pass">
+					</div>
+				</div>
+				
+				</center>
+
+				<br>
+				<br>
+				
+				<input type="submit" class="btn btn-default" value="Aceptar" name="sol_doc" />
+			</center>
+		</form>
+				
+	</div>
+
+</div>
+</body>
+</html>

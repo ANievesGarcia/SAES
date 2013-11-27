@@ -1,0 +1,90 @@
+{% extends "control/basectrl.html" %}
+
+{% block nom-usuario %}{{bol.nombre}} {{bol.apellidoPaterno}} {{bol.apellidoMaterno}}{% endblock %}
+{% block tipo-usuario %}{{bol.clasificacion}}{% endblock %}
+{% block id-usuario %}{{bol}}{% endblock %}
+
+{% block contenido%}
+	
+	<div class="page-header">
+					<h2 align=center>Registro de alumnos</h2>
+				</div>
+
+				{% if notif == 1 %}
+				<script>
+					bootbox.alert("Registro exitoso", function(){window.location='../regAlumno'})
+				</script>
+				{% endif %}
+				{% if notif == 2 %}
+				<script>
+					bootbox.alert("Registro cancelado, el alumno ya existe", function(){window.location='../regAlumno'})
+				</script>
+				{% endif %}
+
+				<div class="show-content">
+						<div class="tab-content" align=center>
+							
+														
+							<div class="tab-pane active" id="regAlumno">
+								<form action="../regAlumno/" method="POST">{% csrf_token %}
+								<table cellpadding="3">
+									<tr>
+										<td><label align="right"><strong>Nombre:</strong></label></td>
+										<td><input type="text" value="" name="nombre_alumno" pattern="^[a-zA-Z\s]*$" required></td>
+										
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Apellido paterno:</strong></label></td>
+										<td><input type="text" value="" name="apellidoPaterno" pattern="^[a-zA-Z\s]*$" required></td>
+										
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Apellido materno:</strong></label></td>
+										<td><input type="text" value="" name="apellidoMaterno" pattern="^[a-zA-Z\s]*$" required></td>
+										
+									</tr>
+
+									<tr>
+										<td><label align="right"><strong>Boleta:</strong></label></td>
+										<td>{{bolet}}</td>
+										<input value="{{bolet}}" name="boleta" hidden>
+	
+									</tr>
+
+									<tr>
+										<td><label align="right"><strong>Sexo:</strong></label></td>
+										<td><select name="sexo">
+										<option value="M"> Masculino </option>
+										<option value="F"> Femenino </option>
+										</select></td>
+										
+									</tr>
+									<tr>
+										<td><label align="right"><strong>Fecha de nacimiento:</strong></label></td>
+										<td><input type="date" name="fec_nac" required></td>
+										
+									</tr>
+
+															</table>
+								<input type="submit" class="btn btn-default" value="Registrar" name="fin_datgen" align=center>
+								</form>
+							</div>
+
+								
+
+							
+							
+							
+							
+							
+
+
+
+
+						</div>
+					</div>
+				</div>
+
+{% endblock %}
+
+				

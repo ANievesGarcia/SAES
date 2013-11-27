@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="{{STATIC_URL}}js/script.js"></script>
+	<link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+	<link rel="stylesheet" href="{{STATIC_URL}}css/inc.css">
+
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/bootstrap.min.css">
+	
+	<script src="{{MEDIA_URL}}js/jquery.js"></script>
+<script src="{{MEDIA_URL}}js/script.js"></script>
+<script src="{{MEDIA_URL}}js/bootstrap.js"></script>
+<script src="{{MEDIA_URL}}js/bootstrap-dropdown.js"></script>
+
+<script src="{{MEDIA_URL}}js/bootbox.min.js"></script>
+<script src="{{MEDIA_URL}}js/horario.js"></script>
+<script src="{{MEDIA_URL}}js/formularios.js"></script>
+	<!--<script type="text/javascript">
+	 	$(".dropdown-toggle").dropdown-toggle
+	</script>-->
+	
+
+	<title>SAESCOM</title>
+</head>
+<body>
+	
+	<div id="header">
+		<img src="{{STATIC_URL}}img/banner.png">
+	</div>
+
+	<div id="wrapper">
+		<div id="navbar">
+			<img src="{{STATIC_URL}}img/escom.gif">
+			<div id='navbar-left'></div>
+			<div id='navbar-right'>
+				<div id="login">
+				
+				<p><span id="usuario-nombre">{% block nom-usuario %}{% endblock %}</span><br>
+				<span id="usuario-tipo">{% block tipo-usuario %}{% endblock %}</span>
+				<span id="usuario-id">{% block id-usuario %}{% endblock %}</span></p>
+				<p><a href="../../cerrar/">Cerrar Sesión</a></p>
+				</div>
+			</div>
+		</div>
+
+		<div id="content">
+
+			<div class="menu-left">
+
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="display: block; position:static; margin-bottom: 5px; width: 100%; ">
+					<!--Información Personal-->
+						<li><a tabindex="-1" href="Aldatosgenerales.html">Datos generales</a></li>
+						<li class="divider"></li>
+
+					<!--Información Académica-->
+						<li><a tabindex="-1" href="Alkardex.html">Kárdex</a></li>
+						<li class="divider"></li>
+
+						<li><a tabindex="-1" href="Alhorario.html">Horario de clases</a></li>
+						<li class="divider"></li>
+						
+						<li class="dropdown-submenu"><a tabindex="-1" href="#">Calificaciones</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Semestre actual</a></li>
+									<li><a href="#">ETS</a></li>
+									<li><a href="#">Saberes Previamente Adquiridos</a></li>
+								</ul>
+						</li>
+						<li class="divider"></li>
+
+					<!--Inscripción-->
+						<li class="dropdown-submenu"><a tabindex="-1" href="#">Inscripciones</a>
+								<ul class="dropdown-menu">
+									<li><a href="/alumno/Alinscribirsemestre">Semestre</a></li>
+									<li><a href="Alinscets.html">ETS</a></li>
+									<li><a href="Alinscsaberes.html">Saberes Previamente Adquiridos</a></li>
+								</ul>
+						</li>
+						<li class="divider"></li>
+
+					<!--Otras opciones-->
+						<li><a tabindex="-1" href="#">Tutor</a></li>
+						<li class="divider"></li>
+						
+						<li><a tabindex="-1" href="#">Solicitar documentos</a></li>
+						<li class="divider"></li>
+						
+						<li><a tabindex="-1" href="#">Evaluar profesores</a></li>
+						<li class="divider"></li>
+						
+						<li><a tabindex="-1" href="#">Horarios de laboratorios</a></li>
+						<li class="divider"></li>
+						
+						<li><a tabindex="-1" href="#">Cambiar contraseña</a></li>
+				</ul>
+			</div>
+
+			<div class="content-principal">
+				<!--Area de trabajo-->
+
+				{% block contenido %}
+				{% endblock %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<div class='spacer'>
+	</div>
+
+
+	<div id="footer">
+		<p>2013 Escuela Superior de Cómputo<a href="">Ayuda</a></p></div>
+	</div>
+
+
+</body>
+</html>

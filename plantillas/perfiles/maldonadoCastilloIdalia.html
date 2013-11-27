@@ -1,0 +1,109 @@
+{% extends 'profesor/base.html' %} 
+
+{% block archivos_css  %}
+
+<link rel="stylesheet" href="{{MEDIA_URL}}css/perfiles/perfil-profesor.css">
+	
+{% endblock %}
+
+{% block archivos_js  %}
+	
+{% endblock %}
+
+
+{%  block contenido %}
+
+
+			<div id='profesor-top'>
+			<table id='tabla-info-profesor'>
+				<tr>
+					<td class='info-profesor'>
+						<h2 id='profesor-nombre'>{{profesor2.cve_usuario.get_full_name}}</h2>
+						<h3 id='profesor-cargos'>{% if es_coordinador > 0 %}
+							Coordinador
+			           {% endif %}  |  {% if es_jefeDepto > 0 %}
+							JefeDepartamento
+			           {% endif %}   | {{profesor2.cve_usuario.clasificacion}}</h3>
+						<br>
+						<p id='profesor-departamento'>Departamento:{{profesor2.Departamento}}</p>
+						<p id='profesor-mail-institucional'>{{profesor2.cve_usuario.email_institucional}}</p>
+						<p id='profesor-mail-personal'>{{profesor2.cve_usuario.email_personal}}</p>
+						<p id='profesor-cubiculo'>{{carrera}}</p>
+						<p id='profesor-telefono'>Tel. Casa {{profesor2.cve_usuario.Telefono_Casa}}|Tel. Celular {{profesor2.cve_usuario.Telefono_Celular}}</p>
+					</td>
+					<td class='perfil-profesor'>
+						<img id='img-profesor' src={{MEDIA_URL}}{{profesor2.cve_usuario.foto}} width=160 height=160>
+						
+					</td>
+				</tr>
+			</table>
+				
+			</div>
+			<div id='profesor-content'>
+				<div id='profesor-left'>
+				<h2>Materias que Imparte</h2>
+				<br>
+					<table id='tabla-materias-profesor'>
+						<tr>
+							<th>Grupo</th>
+							<th>Ubicación</th>
+							<th class='nombre-materia'>Nombre de la materia</th>
+						</tr>
+						{%for materia in materias %}
+							<tr>
+								<td>{{materia.grupo}}</td>
+								<td>{{materia.grupo.cve_salon}}</td>
+								<td>{{materia.materia.nombre}}</td>
+							</tr>
+						{% endfor %}
+						
+					</table>
+					<br>
+					<h2>Materias que Coordina</h2>
+				<br>
+					<table id='tabla-materias-profesor'>
+						<tr>
+							<th>Nombre de la materia</th>
+							<th>Plan</th>
+							<th>Clasificacion</th>
+							<th>Departamento</th>
+
+
+						</tr>
+						{%for materia in materias_coordina %}
+							<tr>
+								<td>{{materia.nombre}}</td>
+								<td>{{materia.plan_estudios}}</td>
+								<td>{{materia.clasificacion}}</td>
+								<td>{{materia.depto}}</td>
+
+							</tr>
+						{% endfor %}
+						
+					</table>
+
+
+				</div>
+				<div id='profesor-right'>
+					<h2>Más información</h2>
+					<br>
+					<p class='label'>Grado</p>
+					<p id='profesor-grado'>{{profesor2.grado_estudios}}</p>
+					<br>
+					<p class='label'>Tutorías</p>
+					<p id='profesor-grado'>Sí ({{num}} alumnos disponibles)</p>
+					<p id='profesor-grado'>Grupo tutorado {{profesor2.grupo_tutorado}}</p>
+					<br>
+					<p class='label'>Asesorías</p>
+					<p id='profesor-asesoria'>{{profesor2.hora_entrada}} - {{profesor2.hora_salida}}</p>
+					<br>
+					
+				</div>
+			</div>
+			
+{% endblock %}
+
+
+
+
+

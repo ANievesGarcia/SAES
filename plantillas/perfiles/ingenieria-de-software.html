@@ -1,0 +1,55 @@
+{% extends 'profesor/base.html' %} 
+
+{% block archivos_css  %}
+
+<link rel="stylesheet" href="{{STATIC_URL}}css/perfiles/perfil-materia.css">
+	
+{% endblock %}
+
+{% block archivos_js  %}
+	
+{% endblock %}
+
+
+{%  block contenido %}
+
+<div id='materia-top'>
+			<table id='tabla-info-materia'>
+				<tr>
+					<td class='info-materia '>
+						<h2 id='materia-nombre'>{{materia2.nombre}}</h2>
+						<h3 id='materia-clasificacion'>{{materia2.clasificacion}}</h3>
+						<br>
+						<p id='materia-creditos'><b>Créditos: </b>{{materia2.creditos}}</p>
+						<p id='materia-nivel'><b>Nivel: </b>{{materia2.nivel}}</p>
+						<p id='materia-coordinador'><b>Coordinador de Materia: </b>{{materia2.coordinador.cve_usuario.get_full_name}}</p>
+						<p id='materia-departamento'><b>Departamento: </b>{{materia2.depto}}</p>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<h2>Profesores que la Imparten</h2>
+				<br>
+					<table id='tabla-profesor-materias'border='1'>
+						<tr>
+							<th>Grupo</th>
+							<th>Ubicación</th>
+							<th class='nombre-profesor'>Nombre del profesor</th>
+						</tr>
+						{%for elemento in materias %}
+							<tr>
+								<td>{{elemento.grupo}}</td>
+								<td>{{elemento.grupo.cve_salon}}</td>
+								<td>{{elemento.profesor.cve_usuario.apellidoPaterno}} {{elemento.profesor.cve_usuario.apellidoMaterno}} {{elemento.profesor.cve_usuario.nombre}}</td>
+							</tr>
+						{% endfor %}
+						
+					</table>
+<br>
+<br>
+	
+<a href="http://148.204.58.221/DISC/temarios/" target="_blank"><input type="submit" name="button" value="TEMARIO" class="btn"/><a/> 
+				</div>
+
+
+{% endblock %}
